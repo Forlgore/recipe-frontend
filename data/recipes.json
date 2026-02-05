@@ -112,6 +112,117 @@
       ]
     },
     {
+      "id": 2,
+      "name": "Creamy Lemon Dill Chicken & Rice Casserole",
+      "servings": 4,
+      "tags": [
+        "chicken",
+        "casserole",
+        "lemon",
+        "dill",
+        "oven",
+        "rice"
+      ],
+      "components": [
+        {
+          "component_name": "Test Component 1",
+          "ingredients": [
+            {
+              "amount": "500 g",
+              "item": "chicken breast",
+              "notes": "cubed"
+            },
+            {
+              "amount": "1 cup",
+              "item": "uncooked brown or basmati rice"
+            },
+            {
+              "amount": "2 cups",
+              "item": "chicken broth",
+              "notes": "unsalted"
+            },
+            {
+              "amount": "1 cup",
+              "item": "plain Greek yogurt"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "fresh dill",
+              "notes": "chopped"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon zest"
+            },
+            {
+              "amount": "2 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 cup",
+              "item": "spinach",
+              "optional": true
+            },
+            {
+              "amount": "1 tsp",
+              "item": "garlic powder"
+            },
+            {
+              "amount": "1 tsp",
+              "item": "onion powder"
+            },
+            {
+              "amount": null,
+              "item": "salt & pepper"
+            }
+          ],
+          "instructions": [
+            "Preheat oven to 190°C / 375°F.",
+            "In a baking dish, combine rice and chicken broth.",
+            "In a bowl, whisk yogurt, dill, lemon zest, lemon juice, garlic powder, and onion powder.",
+            "Add cubed chicken to the mixture and fold to coat.",
+            "Pour chicken mixture over rice. Cover tightly with foil.",
+            "Bake 45–50 minutes, until rice is cooked.",
+            "Stir in spinach (optional), season, and serve warm."
+          ]
+        }
+       ],
+       "ingredientTags": [
+        "chicken-breast",
+        "chicken-broth",
+        "dill",
+        "garlic-powder",
+        "lemon-juice",
+        "lemon-zest",
+        "onion-powder",
+        "plain-greek-yogurt",
+        "salt-pepper",
+        "spinach",
+        "uncooked-brown-basmati-rice"
+      ],
+      "ingredientAtoms": [
+        "basmati",
+        "breast",
+        "broth",
+        "brown",
+        "chicken",
+        "dill",
+        "garlic",
+        "juice",
+        "lemon",
+        "onion",
+        "pepper",
+        "plain",
+        "powder",
+        "rice",
+        "salt",
+        "spinach",
+        "uncooked",
+        "yogurt",
+        "zest"
+      ]
+    },
+    {
       "id": 1,
       "name": "Test recipe 1",
       "servings": 2,
@@ -420,27 +531,27 @@
 				"spinach",
 				"uncooked-brown-basmati-rice"
 			],
-			"ingredientAtoms": [
-				"basmati",
-				"breast",
-				"broth",
-				"brown",
-				"chicken",
-				"dill",
-				"garlic",
-				"juice",
-				"lemon",
-				"onion",
-				"pepper",
-				"plain",
-				"powder",
-				"rice",
-				"salt",
-				"spinach",
-				"uncooked",
-				"yogurt",
-				"zest"
-			]
-		}
+       "ingredientAtoms": [
+        "basmati",
+        "breast",
+        "broth",
+        "brown",
+        "chicken",
+        "dill",
+        "garlic",
+        "juice",
+        "lemon",
+        "onion",
+        "pepper",
+        "plain",
+        "powder",
+        "rice",
+        "salt",
+        "spinach",
+        "uncooked",
+        "yogurt",
+        "zest"
+	]
+    }
   ]
 }
