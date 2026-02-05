@@ -142,43 +142,51 @@
       ]
     },
     {
-  "id": 55,
-  "name": "Banana Kivi pie",
-  "servings": 2,
-  "tags": [
-    "oven",
-    "kivi"
-  ],
-  "components": [
-    {
-      "component_name": "Ingredients",
-      "ingredients": [
+      "id": 0,
+      "name": "",
+      "servings": null,
+      "tags": [],
+      "components": [
         {
-          "amount": "1",
-          "item": "kvi"
-        },
-        {
-          "amount": "2",
-          "item": "banana",
-          "notes": "pealed"
-        },
-        {
-          "amount": "5",
-          "item": "master fruits",
-          "notes": "for gods",
-          "optional": true
+          "component_name": "Ingredients",
+          "ingredients": [
+            {
+              "amount": "1",
+              "item": "qqqqqqq",
+              "key": "qqqqqqq",
+              "notes": "eeeeeee"
+            },
+            {
+              "amount": "2",
+              "item": "22wwwwww",
+              "key": "22wwwwww",
+              "notes": "eeeerrrrrr"
+            },
+            {
+              "amount": "3234",
+              "item": "dfghddsdssd",
+              "key": "dfghddsdssd",
+              "notes": "dffffff",
+              "optional": true
+            }
+          ],
+          "instructions": [
+            "Heat oil in a skillet and cook chicken until browned.",
+            "Add cabbage and peppers; sauté 3–5 minutes.",
+            "Add tamari, garlic, ginger, and chili flakes.",
+            "Cook 1 more minute and serve hot."
+          ]
         }
       ],
-      "instructions": []
-    },
-    {
-      "component_name": "Instructions",
-      "ingredients": [],
-      "instructions": [
-        "1.\tHeat oil in a skillet and cook chicken until browned.",
-        "2.\tAdd cabbage and peppers; sauté 3–5 minutes.",
-        "3.\tAdd tamari, garlic, ginger, and chili flakes.",
-        "4.\tCook 1 more minute and serve hot."
+      "ingredientTags": [
+        "22wwwwww",
+        "dfghddsdssd",
+        "qqqqqqq"
+      ],
+      "ingredientAtoms": [
+        "22wwwwww",
+        "dfghddsdssd",
+        "qqqqqqq"
       ]
     }
   ]
