@@ -2,18 +2,17 @@
   "recipes": [
     {
       "id": 1,
-      "name": "Brothy Lemon-Garlic Beans & Brussels Sprouts Caesar Salad",
+      "name": "Test recipe 1",
       "servings": 2,
       "tags": [
         "beans",
         "brussels sprouts",
         "salad",
-        "stovetop",
         "quick"
       ],
       "components": [
         {
-          "component_name": "Brothy Lemon-Garlic Beans",
+          "component_name": "Test Component 1",
           "ingredients": [
             {
               "amount": "1 can",
@@ -39,11 +38,14 @@
             }
           ],
           "instructions": [
-            "Simmer beans with broth, lemon, garlic, and thyme for 10 minutes."
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1"
           ]
         },
         {
-          "component_name": "Brussels Sprouts Caesar",
+          "component_name": "Test component 2",
           "ingredients": [
             {
               "amount": "2 cups",
@@ -71,7 +73,10 @@
             }
           ],
           "instructions": [
-            "Mix dressing, toss with shaved sprouts, top with parmesan."
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2"
           ]
         }
       ],
@@ -81,16 +86,18 @@
         "garlic",
         "lemon-juice",
         "olive-oil",
-        "olive-oil-mayo",
+        "mayo",
         "parmesan",
-        "salt-pepper-thyme",
-        "shaved-brussels-sprouts",
+        "salt",
+        "pepper",
+        "thyme",
+        "brussels-sprouts",
         "white-beans"
       ],
       "ingredientAtoms": [
         "bean",
         "broth",
-        "brussels",
+        "brussels-sprouts",
         "garlic",
         "juice",
         "lemon",
@@ -101,26 +108,22 @@
         "parmesan",
         "pepper",
         "salt",
-        "shaved",
-        "sprouts",
-        "thyme",
-        "white"
+        "thyme"
       ]
     },
     {
-      "id": 2,
-      "name": "Brothy Lemon-Garlic Beans & Brussels Sprouts Caesar Salad",
+      "id": 1,
+      "name": "Test recipe 1",
       "servings": 2,
       "tags": [
         "beans",
         "brussels sprouts",
         "salad",
-        "stovetop",
         "quick"
       ],
       "components": [
         {
-          "component_name": "Brothy Lemon-Garlic Beans",
+          "component_name": "Test Component 1",
           "ingredients": [
             {
               "amount": "1 can",
@@ -146,11 +149,14 @@
             }
           ],
           "instructions": [
-            "Simmer beans with broth, lemon, garlic, and thyme for 10 minutes."
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1"
           ]
         },
         {
-          "component_name": "Brussels Sprouts Caesar",
+          "component_name": "Test component 2",
           "ingredients": [
             {
               "amount": "2 cups",
@@ -178,7 +184,10 @@
             }
           ],
           "instructions": [
-            "Mix dressing, toss with shaved sprouts, top with parmesan."
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2"
           ]
         }
       ],
@@ -188,16 +197,18 @@
         "garlic",
         "lemon-juice",
         "olive-oil",
-        "olive-oil-mayo",
+        "mayo",
         "parmesan",
-        "salt-pepper-thyme",
-        "shaved-brussels-sprouts",
+        "salt",
+        "pepper",
+        "thyme",
+        "brussels-sprouts",
         "white-beans"
       ],
       "ingredientAtoms": [
         "bean",
         "broth",
-        "brussels",
+        "brussels-sprouts",
         "garlic",
         "juice",
         "lemon",
@@ -208,26 +219,22 @@
         "parmesan",
         "pepper",
         "salt",
-        "shaved",
-        "sprouts",
-        "thyme",
-        "white"
+        "thyme"
       ]
     },
-    {
-      "id": 3,
-      "name": "Brothy Lemon-Garlic Beans & Brussels Sprouts Caesar Salad",
+        {
+      "id": 1,
+      "name": "Test recipe 1",
       "servings": 2,
       "tags": [
         "beans",
         "brussels sprouts",
         "salad",
-        "stovetop",
         "quick"
       ],
       "components": [
         {
-          "component_name": "Brothy Lemon-Garlic Beans",
+          "component_name": "Test Component 1",
           "ingredients": [
             {
               "amount": "1 can",
@@ -253,11 +260,14 @@
             }
           ],
           "instructions": [
-            "Simmer beans with broth, lemon, garlic, and thyme for 10 minutes."
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1"
           ]
         },
         {
-          "component_name": "Brussels Sprouts Caesar",
+          "component_name": "Test component 2",
           "ingredients": [
             {
               "amount": "2 cups",
@@ -285,7 +295,10 @@
             }
           ],
           "instructions": [
-            "Mix dressing, toss with shaved sprouts, top with parmesan."
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2"
           ]
         }
       ],
@@ -295,16 +308,18 @@
         "garlic",
         "lemon-juice",
         "olive-oil",
-        "olive-oil-mayo",
+        "mayo",
         "parmesan",
-        "salt-pepper-thyme",
-        "shaved-brussels-sprouts",
+        "salt",
+        "pepper",
+        "thyme",
+        "brussels-sprouts",
         "white-beans"
       ],
       "ingredientAtoms": [
         "bean",
         "broth",
-        "brussels",
+        "brussels-sprouts",
         "garlic",
         "juice",
         "lemon",
@@ -315,406 +330,118 @@
         "parmesan",
         "pepper",
         "salt",
-        "shaved",
-        "sprouts",
-        "thyme",
-        "white"
+        "thyme"
       ]
     },
     {
-      "id": 4,
-      "name": "High-Protein Enchilada Skillet",
-      "servings": 2.5,
+      "id": 1,
+      "name": "Test recipe 1",
+      "servings": 2,
       "tags": [
-        "chicken or turkey",
-        "skillet",
-        "enchilada",
-        "high-protein"
+        "beans",
+        "brussels sprouts",
+        "salad",
+        "quick"
       ],
       "components": [
         {
-          "component_name": "High-Protein Enchilada Skillet",
+          "component_name": "Test Component 1",
           "ingredients": [
             {
-              "amount": "400g",
-              "item": "chicken",
-              "notes": "or turkey"
+              "amount": "1 can",
+              "item": "white beans",
+              "notes": "rinsed"
             },
             {
-              "amount": "1 cups",
-              "item": "diced tomatoes"
+              "amount": "2 cups",
+              "item": "broth"
             },
             {
-              "amount": "½ cup",
-              "item": "black beans"
+              "amount": "1 tbsp",
+              "item": "lemon juice"
             },
             {
-              "amount": "1 tsp ",
-              "item": "cumin"
+              "amount": "1 clove",
+              "item": "garlic",
+              "notes": "minced"
             },
             {
-              "amount": "1 tsp ",
-              "item": "paprika"
-            },
-            {
-              "amount": "1 tsp ",
-              "item": "garlic powder"
-            },
-            {
-              "amount": "½ cup",
-              "item": "shredded cheese",
-            },
-            {
-              "amount": "1 branch",
-              "item": "Fresh cilantro"
+              "amount": null,
+              "item": "salt, pepper, thyme"
             }
-      ],
-      "instructions": [
-        "1.	Brown meat in a skillet.",
-        "2.	Add tomatoes, spices, and optional beans.",
-        "3.	Simmer 5 minutes.",
-        "4.	Top with cheese and melt.",
-        "5.	Garnish with cilantro."
+          ],
+          "instructions": [
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1",
+            "Instruction test 1"
+          ]
+        },
+        {
+          "component_name": "Test component 2",
+          "ingredients": [
+            {
+              "amount": "2 cups",
+              "item": "shaved Brussels sprouts"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive oil"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive-oil mayo"
+            },
+            {
+              "amount": "1 tsp",
+              "item": "Dijon mustard"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "parmesan"
+            }
+          ],
+          "instructions": [
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2",
+            "Instruction test 2"
+          ]
+        }
       ],
       "ingredientTags": [
-        "black-beans",
-        "cilantro",
-        "cumin",
-        "garlic-powder",
-        "chicken",
-        "turkey",
-        "paprika",
-        "shredded-cheese",
-        "tomatoes"
+        "broth",
+        "dijon-mustard",
+        "garlic",
+        "lemon-juice",
+        "olive-oil",
+        "mayo",
+        "parmesan",
+        "salt",
+        "pepper",
+        "thyme",
+        "brussels-sprouts",
+        "white-beans"
       ],
       "ingredientAtoms": [
         "bean",
-        "cheese",
-        "chicken",
-        "cilantro",
-        "cumin",
+        "broth",
+        "brussels-sprouts",
         "garlic",
-        "ground",
-        "paprika",
-        "powder",
-        "shredded",
-        "tomatoes",
-        "turkey"
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Sheet-Pan Mojo Chicken with Green Beans & Potatoes",
-      "servings": 4,
-      "tags": [
-        "chicken",
-        "sheet-pan",
-        "mojo",
-        "oven"
-      ],
-      "ingredients": [
-        {
-          "amount": "4",
-          "item": "chicken thighs or breasts"
-        },
-        {
-          "amount": "2 cups",
-          "item": "green beans"
-        },
-        {
-          "amount": "2 cups",
-          "item": "diced potatoes"
-        },
-        {
-          "amount": "2 tbsp",
-          "item": "olive oil"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "lime juice"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "orange juice",
-          "notes": "optional natural, no added sugar"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic powder"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "cumin"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "oregano"
-        }
-      ],
-      "instructions": [
-        "Heat oven to 200°C / 400°F.",
-        "Mix oil, citrus, garlic, cumin, oregano.",
-        "Toss chicken and vegetables with the marinade.",
-        "Spread on sheet pan and bake 30–35 minutes."
-      ],
-      "ingredientTags": [
-        "chicken-thighs-breasts",
-        "cumin",
-        "garlic-powder",
-        "green-beans",
-        "lime-juice",
-        "olive-oil",
-        "orange-juice",
-        "oregano",
-        "potatoes"
-      ],
-      "ingredientAtoms": [
-        "bean",
-        "breasts",
-        "chicken",
-        "cumin",
-        "garlic",
-        "green",
         "juice",
-        "lime",
+        "lemon",
+        "mayo",
+        "mustard",
         "oil",
         "olive",
-        "orange",
-        "oregano",
-        "potatoes",
-        "powder",
-        "thighs"
-      ]
-    },
-    {
-      "id": 6,
-      "name": "High-Protein Lemon Chicken & Rice Skillet",
-      "servings": 2,
-      "tags": [
-        "chicken",
-        "lemon",
-        "skillet",
-        "rice",
-        "high-protein"
-      ],
-      "ingredients": [
-        {
-          "amount": "300 g",
-          "item": "chicken breast",
-          "notes": "diced"
-        },
-        {
-          "amount": "1 cup",
-          "item": "cooked rice"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "lemon zest"
-        },
-        {
-          "amount": "2 tbsp",
-          "item": "lemon juice"
-        },
-        {
-          "amount": "1/2 cup",
-          "item": "Greek yogurt"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic powder"
-        },
-        {
-          "amount": "1 cup",
-          "item": "spinach"
-        },
-        {
-          "amount": null,
-          "item": "salt & pepper"
-        }
-      ],
-      "instructions": [
-        "Sauté chicken until browned.",
-        "Add garlic powder, lemon zest, lemon juice.",
-        "Stir in cooked rice and spinach.",
-        "Remove from heat; fold in yogurt until creamy.",
-        "Season and serve."
-      ],
-      "ingredientTags": [
-        "chicken-breast",
-        "cooked-rice",
-        "garlic-powder",
-        "greek-yogurt",
-        "lemon-juice",
-        "lemon-zest",
-        "salt-pepper",
-        "spinach"
-      ],
-      "ingredientAtoms": [
-        "breast",
-        "chicken",
-        "cooked",
-        "garlic",
-        "juice",
-        "lemon",
+        "parmesan",
         "pepper",
-        "powder",
-        "rice",
         "salt",
-        "spinach",
-        "yogurt",
-        "zest"
-      ]
-    },
-    {
-      "id": 7,
-      "name": "Za’atar-Roasted Chicken with Chickpeas",
-      "servings": 3.5,
-      "tags": [
-        "chicken",
-        "za'atar",
-        "roasted",
-        "oven",
-        "chickpeas"
-      ],
-      "ingredients": [
-        {
-          "amount": "4",
-          "item": "chicken thighs",
-          "notes": "or 2 breasts"
-        },
-        {
-          "amount": "1 can",
-          "item": "chickpeas",
-          "notes": "drained"
-        },
-        {
-          "amount": "2 tbsp",
-          "item": "olive oil"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "za’atar"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic powder"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "lemon juice"
-        },
-        {
-          "amount": null,
-          "item": "salt & pepper"
-        }
-      ],
-      "instructions": [
-        "Heat oven to 200°C / 400°F.",
-        "Toss chickpeas with half the oil + 1/2 tbsp za’atar.",
-        "Coat chicken with remaining oil + za’atar + garlic + lemon.",
-        "Place chicken and chickpeas on a pan.",
-        "Roast 28–32 minutes, until chicken is cooked and chickpeas crisp."
-      ],
-      "ingredientTags": [
-        "chicken-thighs",
-        "chickpeas",
-        "garlic-powder",
-        "lemon-juice",
-        "olive-oil",
-        "salt-pepper",
-        "za-atar"
-      ],
-      "ingredientAtoms": [
-        "chicken",
-        "chickpea",
-        "garlic",
-        "juice",
-        "lemon",
-        "oil",
-        "olive",
-        "pepper",
-        "powder",
-        "salt",
-        "thighs",
-        "zaatar"
-      ]
-    },
-    {
-      "id": 8,
-      "name": "Ground Turkey Fajita Bowls",
-      "servings": 2.5,
-      "tags": [
-        "turkey",
-        "fajita",
-        "bowls",
-        "stovetop",
-        "low-carb"
-      ],
-      "ingredients": [
-        {
-          "amount": "400 g",
-          "item": "ground turkey"
-        },
-        {
-          "amount": "1",
-          "item": "bell pepper",
-          "notes": "sliced"
-        },
-        {
-          "amount": "1",
-          "item": "onion",
-          "notes": "sliced"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "paprika"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "cumin"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic powder"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "lime juice"
-        },
-        {
-          "amount": null,
-          "item": "cauliflower rice or lettuce base"
-        }
-      ],
-      "instructions": [
-        "Cook turkey with spices.",
-        "Add peppers + onions and sauté until tender.",
-        "Add lime juice.",
-        "Serve over cauliflower rice or lettuce."
-      ],
-      "ingredientTags": [
-        "bell-pepper",
-        "cauliflower-rice-lettuce",
-        "cumin",
-        "garlic-powder",
-        "ground-turkey",
-        "lime-juice",
-        "onion",
-        "paprika"
-      ],
-      "ingredientAtoms": [
-        "cauliflower",
-        "cumin",
-        "garlic",
-        "juice",
-        "lettuce",
-        "lime",
-        "onion",
-        "paprika",
-        "pepper",
-        "powder",
-        "rice",
-        "turkey"
+        "thyme"
       ]
     }
   ]
