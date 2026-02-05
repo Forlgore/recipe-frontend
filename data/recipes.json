@@ -344,7 +344,10 @@
 				"dill",
 				"oven",
 				"rice"
-			],
+      ],
+      "components": [
+        {
+          "component_name": "Ingredients",
 			"ingredients": [
 				{
 				"amount": "500 g",
