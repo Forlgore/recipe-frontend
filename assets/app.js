@@ -1,1 +1,218 @@
-const state={data:null,selectedAtoms:new Set,mode:"and",q:"",tags:new Set};const $=e=>document.querySelector(e),$$=e=>Array.from(document.querySelectorAll(e));async function loadData(){const e=await fetch("data/recipes.json"),t=await e.json();t.recipes.forEach(e=>{e.tags=e.tags||[],e.ingredientTags=e.ingredientTags||[],e.ingredientAtoms=e.ingredientAtoms||[]}),state.data=t}function uniqueSorted(e){return[...new Set(e)].sort((e,t)=>e.localeCompare(t))}function computeFacets(){const e=state.data.recipes,t=uniqueSorted(e.flatMap(e=>e.tags||[]));return{allTags:t,allAtoms:uniqueSorted(e.flatMap(e=>e.ingredientAtoms||[]))}}function renderTagSelect(e){const t=$("#tagSelect");t.innerHTML="",e.forEach(e=>{const a=document.createElement("option");a.value=e,a.textContent=e,t.appendChild(a)})}function renderAtomChips(e){const t=$("#atomChips");t.innerHTML="";const a=$("#atomFilter").value.trim().toLowerCase();e.filter(e=>e.includes(a)).forEach(e=>{const a=document.createElement("button");a.type="button",a.className="chip"+(state.selectedAtoms.has(e)?" selected":""),a.textContent=e,a.setAttribute("aria-pressed",state.selectedAtoms.has(e)),a.addEventListener("click",(()=>{state.selectedAtoms.has(e)?state.selectedAtoms.delete(e):state.selectedAtoms.add(e),renderAtomChips(e),render()})),t.appendChild(a)})}function matchRecipe(e){const t=state.q.toLowerCase();if(t){const a=[e.name,...(e.tags||[]),...(e.ingredientTags||[]),...(e.ingredientAtoms||[])].join(" ").toLowerCase();if(!a.includes(t))return!1}if(state.tags.size){if(![...state.tags].every((t=>e.tags.includes(t))))return!1}const a=[...state.selectedAtoms];return!a.length||("and"===state.mode?a.every((t=>e.ingredientAtoms.includes(t))):a.some((t=>e.ingredientAtoms.includes(t))))}function render(){const e=$("#results");e.innerHTML="";const{allTags:t,allAtoms:a}=computeFacets();renderTagSelect(t),renderAtomChips(a);let n=state.data.recipes.filter(matchRecipe);n.sort(((e,t)=>e.name.localeCompare(t.name)));const s=document.getElementById("recipeCardTmpl");n.forEach((t=>{const a=s.content.cloneNode(!0);a.querySelector(".card-title").textContent=t.name,a.querySelector(".meta").textContent=`Servings: ${t.servings??""}`;const n=a.querySelector(".tags");t.tags.forEach((e=>{const t=document.createElement("span");t.className="tag",t.textContent=e,n.appendChild(t)}));const r=a.querySelector(".ingredients"),o=a.querySelector(".instructions");if(t.components)t.components.forEach((e=>{const t=document.createElement("h4");t.textContent=e.component_name,r.appendChild(t);const a=document.createElement("ul");(e.ingredients||[]).forEach((e=>{const t=document.createElement("li");t.textContent=[e.amount,e.item,e.notes,e.optional?"(optional)":""].filter(Boolean).join(" "),a.appendChild(t)})),r.appendChild(a);const n=document.createElement("h4");n.textContent=e.component_name+" – Steps",o.appendChild(n);const s=document.createElement("ol");(e.instructions||[]).forEach((e=>{const t=document.createElement("li");t.textContent=e,s.appendChild(t)})),o.appendChild(s)}));else{const e=document.createElement("h4");e.textContent="Ingredients",r.appendChild(e);const t=document.createElement("ul");(t=>{(t.ingredients||[]).forEach((e=>{const a=document.createElement("li");a.textContent=[e.amount,e.item,e.notes,e.optional?"(optional)":""].filter(Boolean).join(" "),t.appendChild(a)}))})(t),r.appendChild(t);const a=document.createElement("h4");a.textContent="Instructions",o.appendChild(a);const n=document.createElement("ol");(t.instructions||[]).forEach((e=>{const t=document.createElement("li");t.textContent=e,n.appendChild(t)})),o.appendChild(n)}e.appendChild(a)})),n.length||(()=>{const t=document.createElement("div");t.textContent="No recipes match your filters.",e.appendChild(t)})();const c=new URLSearchParams;state.q&&c.set("q",state.q),state.tags.size&&c.set("tags",[...state.tags].join(",")),state.selectedAtoms.size&&c.set("atoms",[...state.selectedAtoms].join(",")),c.set("mode",state.mode),history.replaceState({},"","?"+c.toString())}function restoreFromURL(){const e=new URL(location.href),t=e.searchParams.get("q")||"",a=(e.searchParams.get("tags")||"").split(",").filter(Boolean),n=(e.searchParams.get("atoms")||"").split(",").filter(Boolean),s=e.searchParams.get("mode")||"and";$("#q").value=t,state.q=t,state.mode=s,state.tags=new Set(a),state.selectedAtoms=new Set(n)}function setupEvents(){$("#q").addEventListener("input",(e=>{state.q=e.target.value.trim(),render()})),$("#tagSelect").addEventListener("change",(e=>{const t=Array.from(e.target.selectedOptions).map((e=>e.value));state.tags=new Set(t),render()})),$$("#atomChips .chip").forEach((e=>e.addEventListener("click",render))),$$("#atom-mode input").forEach((e=>e.addEventListener("change",(()=>{state.mode=e.value,render()})))),document.body.addEventListener("change",(e=>{"mode"===e.target.name&&(state.mode=e.target.value,render())})),$("#atomFilter").addEventListener("input",(()=>render())),$("#clearBtn").addEventListener("click",(()=>{state.q="",state.tags.clear(),state.selectedAtoms.clear(),state.mode="and",$("#q").value="",$("#atomFilter").value="",render()}))} (async function(){await loadData(),restoreFromURL(),setupEvents(),render()})();
+// assets/app.js
+const state = {
+  data: null,
+  selectedAtoms: new Set(),
+  mode: 'and', // 'and'|'or'
+  q: '',
+  tags: new Set(),
+  facets: { allTags: [], allAtoms: [] } // cached after load
+};
+
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+async function loadData() {
+  const res = await fetch('data/recipes.json');
+  const json = await res.json();
+  json.recipes.forEach(r => {
+    r.tags = r.tags || [];
+    r.ingredientTags = r.ingredientTags || [];
+    r.ingredientAtoms = r.ingredientAtoms || [];
+  });
+  state.data = json;
+
+  // Build global facets ONCE (from full dataset; not filtered),
+  // so chips don't "disappear" during interaction.
+  const uniqueSorted = (arr) => [...new Set(arr)].sort((a,b)=>a.localeCompare(b));
+  state.facets.allTags  = uniqueSorted(json.recipes.flatMap(r => r.tags || []));
+  state.facets.allAtoms = uniqueSorted(json.recipes.flatMap(r => r.ingredientAtoms || []));
+}
+
+function renderTagSelectOnce() {
+  const sel = $('#tagSelect');
+  if (!sel || sel.dataset.bound === '1') return;
+  sel.innerHTML = '';
+  state.facets.allTags.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    sel.appendChild(opt);
+  });
+  sel.dataset.bound = '1';
+}
+
+function renderAtomChips() {
+  // Only re-render the chips area, not the entire controls panel.
+  const box = $('#atomChips');
+  if (!box) return;
+  const filter = $('#atomFilter').value.trim().toLowerCase();
+  box.innerHTML = '';
+  state.facets.allAtoms
+    .filter(a => a.includes(filter))
+    .forEach(atom => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'chip' + (state.selectedAtoms.has(atom) ? ' selected' : '');
+      chip.textContent = atom;
+      chip.setAttribute('aria-pressed', state.selectedAtoms.has(atom));
+      chip.addEventListener('click', () => {
+        // Toggle selection, then re-render only chips + results
+        if (state.selectedAtoms.has(atom)) state.selectedAtoms.delete(atom);
+        else state.selectedAtoms.add(atom);
+        renderAtomChips();
+        renderResults();
+        updateURL();
+      });
+      box.appendChild(chip);
+    });
+}
+
+function matchRecipe(r) {
+  const q = state.q.toLowerCase();
+  if (q) {
+    const hay = [r.name, ...(r.tags||[]), ...(r.ingredientTags||[]), ...(r.ingredientAtoms||[])]
+      .join(' ').toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  if (state.tags.size) {
+    if (![...state.tags].every(t => r.tags.includes(t))) return false;
+  }
+  const atoms = [...state.selectedAtoms];
+  if (atoms.length) {
+    return state.mode === 'and'
+      ? atoms.every(a => r.ingredientAtoms.includes(a))
+      : atoms.some(a => r.ingredientAtoms.includes(a));
+  }
+  return true;
+}
+
+function renderResults() {
+  const list = $('#results');
+  list.innerHTML = '';
+  let results = state.data.recipes.filter(matchRecipe);
+  results.sort((a,b)=>a.name.localeCompare(b.name));
+
+  const tmpl = document.getElementById('recipeCardTmpl');
+  results.forEach(r => {
+    const node = tmpl.content.cloneNode(true);
+    node.querySelector('.card-title').textContent = r.name;
+    node.querySelector('.meta').textContent = `Servings: ${r.servings ?? ''}`;
+    const tg = node.querySelector('.tags');
+    r.tags.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'tag'; span.textContent = t; tg.appendChild(span);
+    });
+    const ingBox = node.querySelector('.ingredients');
+    const insBox = node.querySelector('.instructions');
+    if (r.components) {
+      r.components.forEach(c => {
+        const h = document.createElement('h4'); h.textContent = c.component_name; ingBox.appendChild(h);
+        const ul = document.createElement('ul');
+        (c.ingredients||[]).forEach(i => {
+          const li = document.createElement('li');
+          li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
+          ul.appendChild(li);
+        });
+        ingBox.appendChild(ul);
+        const h2 = document.createElement('h4'); h2.textContent = c.component_name + ' – Steps'; insBox.appendChild(h2);
+        const ol = document.createElement('ol');
+        (c.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
+        insBox.appendChild(ol);
+      });
+    } else {
+      const h = document.createElement('h4'); h.textContent = 'Ingredients'; ingBox.appendChild(h);
+      const ul = document.createElement('ul');
+      (r.ingredients||[]).forEach(i => {
+        const li = document.createElement('li');
+        li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
+        ul.appendChild(li);
+      });
+      ingBox.appendChild(ul);
+      const h2 = document.createElement('h4'); h2.textContent = 'Instructions'; insBox.appendChild(h2);
+      const ol = document.createElement('ol');
+      (r.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
+      insBox.appendChild(ol);
+    }
+    list.appendChild(node);
+  });
+
+  if (!results.length) {
+    const div = document.createElement('div');
+    div.textContent = 'No recipes match your filters.';
+    list.appendChild(div);
+  }
+}
+
+function updateURL() {
+  const params = new URLSearchParams();
+  if (state.q) params.set('q', state.q);
+  if (state.tags.size) params.set('tags', [...state.tags].join(','));
+  if (state.selectedAtoms.size) params.set('atoms', [...state.selectedAtoms].join(','));
+  params.set('mode', state.mode);
+  history.replaceState({}, '', '?' + params.toString());
+}
+
+function restoreFromURL() {
+  const url = new URL(location.href);
+  const q = url.searchParams.get('q') || '';
+  const tags = (url.searchParams.get('tags')||'').split(',').filter(Boolean);
+  const atoms = (url.searchParams.get('atoms')||'').split(',').filter(Boolean);
+  const mode = url.searchParams.get('mode') || 'and';
+  $('#q').value = q; state.q = q; state.mode = mode;
+  state.tags = new Set(tags); state.selectedAtoms = new Set(atoms);
+}
+
+function bindControlEvents() {
+  // Search box
+  $('#q').addEventListener('input', e => {
+    state.q = e.target.value.trim();
+    renderResults();
+    updateURL();
+  });
+
+  // Tags multi-select (do not rebuild options during render)
+  $('#tagSelect').addEventListener('change', e => {
+    const selected = Array.from(e.target.selectedOptions).map(o=>o.value);
+    state.tags = new Set(selected);
+    renderResults();
+    updateURL();
+  });
+
+  // AND/OR radios — select by CLASS, not ID
+  document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => {
+    r.addEventListener('change', e => {
+      state.mode = e.target.value;
+      renderResults();
+      updateURL();
+    });
+  });
+
+  // Live filter for the chips list
+  $('#atomFilter').addEventListener('input', () => {
+    renderAtomChips();
+  });
+
+  // Clear filters
+  $('#clearBtn').addEventListener('click', () => {
+    state.q = '';
+    state.tags.clear();
+    state.selectedAtoms.clear();
+    state.mode = 'and';
+    $('#q').value = '';
+    $('#atomFilter').value = '';
+    // Reset radios to AND
+    document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => r.checked = (r.value === 'and'));
+    renderAtomChips();
+    renderResults();
+    updateURL();
+  });
+}
+
+(async function init() {
+  await loadData();
+  restoreFromURL();
+  renderTagSelectOnce();   // build tag options once
+  bindControlEvents();     // bind once
+  renderAtomChips();       // render chips area
+  renderResults();         // render cards
+  updateURL();
+})();
