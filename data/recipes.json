@@ -188,6 +188,59 @@
         "dfghddsdssd",
         "qqqqqqq"
       ]
+    },
+        {
+      "id": 5,
+      "name": "Kiwi banana thing",
+      "servings": 2,
+      "tags": [
+        "sweet",
+        "cake",
+        "party"
+      ],
+      "components": [
+        {
+          "component_name": "Ingredients",
+          "ingredients": [
+            {
+              "amount": null,
+              "item": "1cup banana",
+              "key": "1cup-banana"
+            },
+            {
+              "amount": null,
+              "item": "1cl vodka",
+              "key": "1cl-vodka"
+            },
+            {
+              "amount": null,
+              "item": "1 kiwi Pealed",
+              "key": "1-kiwi-pealed"
+            }
+          ],
+          "instructions": [
+            "Brown meat in a skillet.",
+            "Add tomatoes, spices, and optional beans.",
+            "Simmer 5 minutes.",
+            "Top with cheese and melt.",
+            "Garnish with cilantro."
+          ]
+        }
+      ],
+      "ingredientTags": [
+        "1-kiwi-pealed",
+        "1cl-vodka",
+        "1cup-banana"
+      ],
+      "ingredientAtoms": [
+        "1",
+        "1cl",
+        "1cup",
+        "banana",
+        "kiwi",
+        "pealed",
+        "vodka"
+      ]
     }
   ]
 }
