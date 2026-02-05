@@ -47,7 +47,8 @@ function renderAtomChips() {
   const filter = $('#atomFilter').value.trim().toLowerCase();
   box.innerHTML = '';
   state.facets.allAtoms
-    .filter(a => a.includes(filter))
+    // Case-insensitive filtering
+    .filter(a => a.toLowerCase().includes(filter))
     .forEach(atom => {
       const chip = document.createElement('button');
       chip.type = 'button';
@@ -96,29 +97,54 @@ function renderResults() {
     const node = tmpl.content.cloneNode(true);
     node.querySelector('.card-title').textContent = r.name;
     node.querySelector('.meta').textContent = `Servings: ${r.servings ?? ''}`;
+
     const tg = node.querySelector('.tags');
     r.tags.forEach(t => {
       const span = document.createElement('span');
       span.className = 'tag'; span.textContent = t; tg.appendChild(span);
     });
+
     const ingBox = node.querySelector('.ingredients');
     const insBox = node.querySelector('.instructions');
-    if (r.components) {
+
+    if (r.components && Array.isArray(r.components) && r.components.length) {
+      // Render each component, but only output sections that actually exist
       r.components.forEach(c => {
-        const h = document.createElement('h4'); h.textContent = c.component_name; ingBox.appendChild(h);
-        const ul = document.createElement('ul');
-        (c.ingredients||[]).forEach(i => {
-          const li = document.createElement('li');
-          li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
-          ul.appendChild(li);
-        });
-        ingBox.appendChild(ul);
-        const h2 = document.createElement('h4'); h2.textContent = c.component_name + ' – Steps'; insBox.appendChild(h2);
-        const ol = document.createElement('ol');
-        (c.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
-        insBox.appendChild(ol);
+        // ---- Ingredients block (conditional) ----
+        if (Array.isArray(c.ingredients) && c.ingredients.length) {
+          const h = document.createElement('h4');
+          // Use the component name if provided, otherwise a generic "Ingredients"
+          h.textContent = c.component_name || 'Ingredients';
+          ingBox.appendChild(h);
+
+          const ul = document.createElement('ul');
+          c.ingredients.forEach(i => {
+            const li = document.createElement('li');
+            li.textContent = [i.amount, i.item, i.notes, i.optional ? '(optional)' : '']
+              .filter(Boolean).join(' ');
+            ul.appendChild(li);
+          });
+          ingBox.appendChild(ul);
+        }
+
+        // ---- Instructions block (conditional) ----
+        if (Array.isArray(c.instructions) && c.instructions.length) {
+          const h2 = document.createElement('h4');
+          // Do not append " – Steps" to avoid duplicate/awkward headings
+          h2.textContent = c.component_name || 'Instructions';
+          insBox.appendChild(h2);
+
+          const ol = document.createElement('ol');
+          c.instructions.forEach(step => {
+            const li = document.createElement('li');
+            li.textContent = step;
+            ol.appendChild(li);
+          });
+          insBox.appendChild(ol);
+        }
       });
     } else {
+      // Fallback when there are no components: render top-level ingredients/instructions
       const h = document.createElement('h4'); h.textContent = 'Ingredients'; ingBox.appendChild(h);
       const ul = document.createElement('ul');
       (r.ingredients||[]).forEach(i => {
@@ -127,11 +153,13 @@ function renderResults() {
         ul.appendChild(li);
       });
       ingBox.appendChild(ul);
+
       const h2 = document.createElement('h4'); h2.textContent = 'Instructions'; insBox.appendChild(h2);
       const ol = document.createElement('ol');
       (r.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
       insBox.appendChild(ol);
     }
+
     list.appendChild(node);
   });
 
@@ -164,55 +192,3 @@ function restoreFromURL() {
 function bindControlEvents() {
   // Search box
   $('#q').addEventListener('input', e => {
-    state.q = e.target.value.trim();
-    renderResults();
-    updateURL();
-  });
-
-  // Tags multi-select (do not rebuild options during render)
-  $('#tagSelect').addEventListener('change', e => {
-    const selected = Array.from(e.target.selectedOptions).map(o=>o.value);
-    state.tags = new Set(selected);
-    renderResults();
-    updateURL();
-  });
-
-  // AND/OR radios — select by CLASS, not ID
-  document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => {
-    r.addEventListener('change', e => {
-      state.mode = e.target.value;
-      renderResults();
-      updateURL();
-    });
-  });
-
-  // Live filter for the chips list
-  $('#atomFilter').addEventListener('input', () => {
-    renderAtomChips();
-  });
-
-  // Clear filters
-  $('#clearBtn').addEventListener('click', () => {
-    state.q = '';
-    state.tags.clear();
-    state.selectedAtoms.clear();
-    state.mode = 'and';
-    $('#q').value = '';
-    $('#atomFilter').value = '';
-    // Reset radios to AND
-    document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => r.checked = (r.value === 'and'));
-    renderAtomChips();
-    renderResults();
-    updateURL();
-  });
-}
-
-(async function init() {
-  await loadData();
-  restoreFromURL();
-  renderTagSelectOnce();   // build tag options once
-  bindControlEvents();     // bind once
-  renderAtomChips();       // render chips area
-  renderResults();         // render cards
-  updateURL();
-})();
