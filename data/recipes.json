@@ -126,67 +126,71 @@
         "broth",
         "dill",
         "garlic",
-        "powder",
-        "lemon",
-        "juice",
-        "zest",
-        "onion",
-        "pepper",
-        "salt",
-        "spinach",
-        "rice",
-        "brown",
-        "yogurt",
-        "plain",
         "greek"
       ]
     },
     {
-      "id": 0,
-      "name": "",
-      "servings": null,
-      "tags": [],
+      "id": 33,
+      "name": "Best soup ever",
+      "servings": 2,
+      "tags": [
+        "soup",
+        "italian",
+        "spicy"
+      ],
       "components": [
         {
           "component_name": "Ingredients",
           "ingredients": [
             {
+              "amount": "200g",
+              "item": "Chicken",
+              "key": "chicken"
+            },
+            {
               "amount": "1",
-              "item": "qqqqqqq",
-              "key": "qqqqqqq",
-              "notes": "eeeeeee"
+              "item": "lettuce",
+              "key": "lettuce"
             },
             {
-              "amount": "2",
-              "item": "22wwwwww",
-              "key": "22wwwwww",
-              "notes": "eeeerrrrrr"
+              "amount": "3cl",
+              "item": "cream",
+              "key": "cream"
             },
             {
-              "amount": "3234",
-              "item": "dfghddsdssd",
-              "key": "dfghddsdssd",
-              "notes": "dffffff",
-              "optional": true
+              "amount": "4st",
+              "item": "bananas",
+              "key": "bananas"
+            },
+            {
+              "amount": "5dl",
+              "item": "rum",
+              "key": "rum"
             }
           ],
           "instructions": [
-            "Heat oil in a skillet and cook chicken until browned.",
-            "Add cabbage and peppers; sauté 3–5 minutes.",
-            "Add tamari, garlic, ginger, and chili flakes.",
-            "Cook 1 more minute and serve hot."
+            "Brown meat in a skillet.",
+            "Add tomatoes, spices, and optional beans.",
+            "Simmer 5 minutes.",
+            "Top with cheese and melt.",
+            "Garnish with cilantro.",
+            "Do what the fuck u want"
           ]
         }
       ],
       "ingredientTags": [
-        "22wwwwww",
-        "dfghddsdssd",
-        "qqqqqqq"
+        "bananas",
+        "chicken",
+        "cream",
+        "lettuce",
+        "rum"
       ],
       "ingredientAtoms": [
-        "22wwwwww",
-        "dfghddsdssd",
-        "qqqqqqq"
+        "bananas",
+        "chicken",
+        "cream",
+        "lettuce",
+        "rum"
       ]
     },
         {
@@ -203,19 +207,19 @@
           "component_name": "Ingredients",
           "ingredients": [
             {
-              "amount": null,
-              "item": "1cup banana",
-              "key": "1cup-banana"
+              "amount": "3st",
+              "item": "banana",
+              "key": "banana"
             },
             {
-              "amount": null,
-              "item": "1cl vodka",
-              "key": "1cl-vodka"
+              "amount": "3cl",
+              "item": "vodka",
+              "key": "vodka"
             },
             {
-              "amount": null,
-              "item": "1 kiwi Pealed",
-              "key": "1-kiwi-pealed"
+              "amount": "3st",
+              "item": "kiwi",
+              "key": "kiwi"
             }
           ],
           "instructions": [
@@ -228,14 +232,11 @@
         }
       ],
       "ingredientTags": [
-        "1-kiwi-pealed",
-        "1cl-vodka",
-        "1cup-banana"
+        "kiwi",
+        "vodka",
+        "banana"
       ],
       "ingredientAtoms": [
-        "1",
-        "1cl",
-        "1cup",
         "banana",
         "kiwi",
         "pealed",
