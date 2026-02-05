@@ -2,81 +2,43 @@
   "recipes": [
     {
       "id": 1,
-      "name": "Test recipe 1",
+      "name": "Test Recipe 1",
       "servings": 2,
-      "tags": [
-        "beans",
-        "brussels sprouts",
-        "salad",
-        "quick"
-      ],
+      "tags": ["bean", "brussels-sprout", "salad", "quick"],
       "components": [
         {
           "component_name": "Test Component 1",
           "ingredients": [
-            {
-              "amount": "1 can",
-              "item": "white beans",
-              "notes": "rinsed"
-            },
-            {
-              "amount": "2 cups",
-              "item": "broth"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 clove",
-              "item": "garlic",
-              "notes": "minced"
-            },
-            {
-              "amount": null,
-              "item": "salt, pepper, thyme"
-            }
+            { "amount": "1 can", "item": "white beans", "key": "white-bean", "notes": "rinsed" },
+            { "amount": "2 cups", "item": "broth", "key": "broth" },
+            { "amount": "1 tbsp", "item": "lemon juice", "key": "lemon-juice" },
+            { "amount": "1 clove", "item": "garlic", "key": "garlic", "notes": "minced" },
+            { "amount": null, "item": "salt", "key": "salt" },
+            { "amount": null, "item": "pepper", "key": "pepper" },
+            { "amount": null, "item": "thyme", "key": "thyme" }
           ],
           "instructions": [
-            "Instruction test 1",
-            "Instruction test 1",
-            "Instruction test 1",
-            "Instruction test 1"
+            "Instruction test 1 step 1",
+            "Instruction test 1 step 2",
+            "Instruction test 1 step 3",
+            "Instruction test 1 step 4"
           ]
         },
         {
-          "component_name": "Test component 2",
+          "component_name": "Test Component 2",
           "ingredients": [
-            {
-              "amount": "2 cups",
-              "item": "shaved Brussels sprouts"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "olive oil"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "olive-oil mayo"
-            },
-            {
-              "amount": "1 tsp",
-              "item": "Dijon mustard"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "parmesan"
-            }
+            { "amount": "2 cups", "item": "shaved Brussels sprouts", "key": "brussels-sprout" },
+            { "amount": "1 tbsp", "item": "olive oil", "key": "olive-oil" },
+            { "amount": "1 tbsp", "item": "lemon juice", "key": "lemon-juice" },
+            { "amount": "1 tbsp", "item": "olive-oil mayo", "key": "olive-oil-mayo" },
+            { "amount": "1 tsp", "item": "Dijon mustard", "key": "dijon-mustard" },
+            { "amount": "1 tbsp", "item": "parmesan", "key": "parmesan" }
           ],
           "instructions": [
-            "Instruction test 2",
-            "Instruction test 2",
-            "Instruction test 2",
-            "Instruction test 2"
+            "Instruction test 2 step 1",
+            "Instruction test 2 step 2",
+            "Instruction test 2 step 3",
+            "Instruction test 2 step 4"
           ]
         }
       ],
@@ -86,25 +48,25 @@
         "garlic",
         "lemon-juice",
         "olive-oil",
-        "mayo",
+        "olive-oil-mayo",
         "parmesan",
         "salt",
         "pepper",
         "thyme",
-        "brussels-sprouts",
-        "white-beans"
+        "brussels-sprout",
+        "white-bean"
       ],
       "ingredientAtoms": [
         "bean",
+        "brussels-sprout",
         "broth",
-        "brussels-sprouts",
         "garlic",
-        "juice",
         "lemon",
+        "juice",
         "mayo",
         "mustard",
-        "oil",
         "olive",
+        "oil",
         "parmesan",
         "pepper",
         "salt",
@@ -115,66 +77,23 @@
       "id": 2,
       "name": "Creamy Lemon Dill Chicken & Rice Casserole",
       "servings": 4,
-      "tags": [
-        "chicken",
-        "casserole",
-        "lemon",
-        "dill",
-        "oven",
-        "rice"
-      ],
+      "tags": ["chicken", "casserole", "lemon", "dill", "oven", "rice"],
       "components": [
         {
-          "component_name": "Test Component 1",
+          "component_name": "Main",
           "ingredients": [
-            {
-              "amount": "500 g",
-              "item": "chicken breast",
-              "notes": "cubed"
-            },
-            {
-              "amount": "1 cup",
-              "item": "uncooked brown or basmati rice"
-            },
-            {
-              "amount": "2 cups",
-              "item": "chicken broth",
-              "notes": "unsalted"
-            },
-            {
-              "amount": "1 cup",
-              "item": "plain Greek yogurt"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "fresh dill",
-              "notes": "chopped"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon zest"
-            },
-            {
-              "amount": "2 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 cup",
-              "item": "spinach",
-              "optional": true
-            },
-            {
-              "amount": "1 tsp",
-              "item": "garlic powder"
-            },
-            {
-              "amount": "1 tsp",
-              "item": "onion powder"
-            },
-            {
-              "amount": null,
-              "item": "salt & pepper"
-            }
+            { "amount": "500 g", "item": "chicken breast", "key": "chicken-breast", "notes": "cubed" },
+            { "amount": "1 cup", "item": "uncooked brown rice", "key": "brown-rice" },
+            { "amount": "2 cups", "item": "chicken broth (unsalted)", "key": "chicken-broth" },
+            { "amount": "1 cup", "item": "plain Greek yogurt", "key": "plain-greek-yogurt" },
+            { "amount": "1 tbsp", "item": "fresh dill", "key": "dill", "notes": "chopped" },
+            { "amount": "1 tbsp", "item": "lemon zest", "key": "lemon-zest" },
+            { "amount": "2 tbsp", "item": "lemon juice", "key": "lemon-juice" },
+            { "amount": "1 cup", "item": "spinach", "key": "spinach", "optional": true },
+            { "amount": "1 tsp", "item": "garlic powder", "key": "garlic-powder" },
+            { "amount": "1 tsp", "item": "onion powder", "key": "onion-powder" },
+            { "amount": null, "item": "salt", "key": "salt" },
+            { "amount": null, "item": "pepper", "key": "pepper" }
           ],
           "instructions": [
             "Preheat oven to 190°C / 375°F.",
@@ -183,11 +102,11 @@
             "Add cubed chicken to the mixture and fold to coat.",
             "Pour chicken mixture over rice. Cover tightly with foil.",
             "Bake 45–50 minutes, until rice is cooked.",
-            "Stir in spinach (optional), season, and serve warm."
+            "Stir in spinach (optional), season with salt and pepper, and serve warm."
           ]
         }
-       ],
-       "ingredientTags": [
+      ],
+      "ingredientTags": [
         "chicken-breast",
         "chicken-broth",
         "dill",
@@ -196,252 +115,30 @@
         "lemon-zest",
         "onion-powder",
         "plain-greek-yogurt",
-        "salt-pepper",
+        "salt",
+        "pepper",
         "spinach",
-        "uncooked-brown-basmati-rice"
+        "brown-rice"
       ],
       "ingredientAtoms": [
-        "basmati",
+        "chicken",
         "breast",
         "broth",
-        "brown",
-        "chicken",
         "dill",
         "garlic",
-        "juice",
+        "powder",
         "lemon",
+        "juice",
+        "zest",
         "onion",
         "pepper",
-        "plain",
-        "powder",
-        "rice",
         "salt",
         "spinach",
-        "uncooked",
+        "rice",
+        "brown",
         "yogurt",
-        "zest"
-      ]
-    },
-    {
-      "id": 1,
-      "name": "Test recipe 1",
-      "servings": 2,
-      "tags": [
-        "beans",
-        "brussels sprouts",
-        "salad",
-        "quick"
-      ],
-      "components": [
-        {
-          "component_name": "Test Component 1",
-          "ingredients": [
-            {
-              "amount": "1 can",
-              "item": "white beans",
-              "notes": "rinsed"
-            },
-            {
-              "amount": "2 cups",
-              "item": "broth"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 clove",
-              "item": "garlic",
-              "notes": "minced"
-            },
-            {
-              "amount": null,
-              "item": "salt, pepper, thyme"
-            }
-          ],
-          "instructions": [
-            "Instruction test 1",
-            "Instruction test 1",
-            "Instruction test 1",
-            "Instruction test 1"
-          ]
-        },
-        {
-          "component_name": "Test component 2",
-          "ingredients": [
-            {
-              "amount": "2 cups",
-              "item": "shaved Brussels sprouts"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "olive oil"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "olive-oil mayo"
-            },
-            {
-              "amount": "1 tsp",
-              "item": "Dijon mustard"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "parmesan"
-            }
-          ],
-          "instructions": [
-            "Instruction test 2",
-            "Instruction test 2",
-            "Instruction test 2",
-            "Instruction test 2"
-          ]
-        }
-      ],
-      "ingredientTags": [
-        "broth",
-        "dijon-mustard",
-        "garlic",
-        "lemon-juice",
-        "olive-oil",
-        "mayo",
-        "parmesan",
-        "salt",
-        "pepper",
-        "thyme",
-        "brussels-sprouts",
-        "white-beans"
-      ],
-      "ingredientAtoms": [
-        "bean",
-        "broth",
-        "brussels-sprouts",
-        "garlic",
-        "juice",
-        "lemon",
-        "mayo",
-        "mustard",
-        "oil",
-        "olive",
-        "parmesan",
-        "pepper",
-        "salt",
-        "thyme"
-      ]
-    },
-        {
-      "id": 1,
-      "name": "Test recipe 1",
-      "servings": 2,
-      "tags": [
-        "beans",
-        "brussels sprouts",
-        "salad",
-        "quick"
-      ],
-      "components": [
-        {
-          "component_name": "Test Component 1",
-          "ingredients": [
-            {
-              "amount": "1 can",
-              "item": "white beans",
-              "notes": "rinsed"
-            },
-            {
-              "amount": "2 cups",
-              "item": "broth"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 clove",
-              "item": "garlic",
-              "notes": "minced"
-            },
-            {
-              "amount": null,
-              "item": "salt, pepper, thyme"
-            }
-          ],
-          "instructions": [
-            "Instruction test 1",
-            "Instruction test 1",
-            "Instruction test 1",
-            "Instruction test 1"
-          ]
-        },
-        {
-          "component_name": "Test component 2",
-          "ingredients": [
-            {
-              "amount": "2 cups",
-              "item": "shaved Brussels sprouts"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "olive oil"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "lemon juice"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "olive-oil mayo"
-            },
-            {
-              "amount": "1 tsp",
-              "item": "Dijon mustard"
-            },
-            {
-              "amount": "1 tbsp",
-              "item": "parmesan"
-            }
-          ],
-          "instructions": [
-            "Instruction test 2",
-            "Instruction test 2",
-            "Instruction test 2",
-            "Instruction test 2"
-          ]
-        }
-      ],
-      "ingredientTags": [
-        "broth",
-        "dijon-mustard",
-        "garlic",
-        "lemon-juice",
-        "olive-oil",
-        "mayo",
-        "parmesan",
-        "salt",
-        "pepper",
-        "thyme",
-        "brussels-sprouts",
-        "white-beans"
-      ],
-      "ingredientAtoms": [
-        "bean",
-        "broth",
-        "brussels-sprouts",
-        "garlic",
-        "juice",
-        "lemon",
-        "mayo",
-        "mustard",
-        "oil",
-        "olive",
-        "parmesan",
-        "pepper",
-        "salt",
-        "thyme"
+        "plain",
+        "greek"
       ]
     }
   ]
