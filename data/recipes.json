@@ -242,6 +242,66 @@
         "pealed",
         "vodka"
       ]
+    },
+        {
+      "id": 22,
+      "name": "Cool pie",
+      "servings": 22,
+      "tags": [
+        "pie",
+        "fruit",
+        "sweet"
+      ],
+      "components": [
+        {
+          "component_name": "Ingredients",
+          "ingredients": [
+            {
+              "amount": "1cl",
+              "item": "cream",
+              "key": "cream"
+            },
+            {
+              "amount": "2st",
+              "item": "banana",
+              "key": "banana"
+            },
+            {
+              "amount": "4dl",
+              "item": "flour",
+              "key": "flour"
+            },
+            {
+              "amount": "100g",
+              "item": "whatever",
+              "key": "whatever",
+              "notes": "extra",
+              "optional": true
+            }
+          ]
+        },
+        {
+          "component_name": "Instructions",
+          "instructions": [
+            "DO what you want",
+            "cook the shit somewhere",
+            "just blend it all in a mixer",
+            "drink hot or cold or just skill the mixing and eat as is"
+          ]
+        }
+      ],
+      "ingredientTags": [
+        "banana",
+        "cream",
+        "flour",
+        "whatever"
+      ],
+      "ingredientAtoms": [
+        "banana",
+        "cream",
+        "flour",
+        "whatever"
+      ]
     }
   ]
 }
