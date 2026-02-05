@@ -17,6 +17,7 @@ body{
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
+  overflow-x:hidden; /* prevent horizontal jitter on mobile */
 }
 
 /* Header */
@@ -49,7 +50,8 @@ body{
   position:sticky;
   top:1rem;
   height:max-content;
-  z-index:5; /* ensure above results for safety */
+  z-index:10;             /* stay above results on desktop */
+  box-shadow:0 0 0 1px #132033; /* ensure opaque coverage */
 }
 
 .field{ margin-bottom:1rem; }
@@ -132,8 +134,8 @@ select{ min-height:8rem; }
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
   gap:1rem;
-  position:relative; /* for z-index context on mobile */
-  z-index:1;
+  position:relative; /* create stacking context */
+  z-index:1;         /* below .controls on desktop */
 }
 
 .card{
@@ -197,23 +199,43 @@ select{ min-height:8rem; }
 }
 
 /* =========================
-   Mobile & small tablet fixes
+   Mobile & small tablet hardening
    ========================= */
 
-/* On small screens switch to single column and disable sticky panel
-   to prevent results from scrolling underneath the controls. */
+/* On small screens we switch to single column and force the filter
+   to be non-sticky so results can't scroll underneath it.
+   We also reduce the chip panel height and ensure opaque layering. */
 @media (max-width: 900px){
   .container{
     grid-template-columns:1fr;
   }
+
+  /* FORCE non-sticky on mobile (use !important to beat cached rules) */
   .controls{
-    position:static;
-    top:auto;
-    z-index:auto;
+    position:static !important;
+    top:auto !important;
     margin-bottom:1rem;
+    z-index:auto;               /* no overlap */
+    background:var(--panel);    /* solid background */
   }
-  /* Make the chips list more compact on small screens */
+
+  /* Results get their own stacking context and a little spacing */
+  .results{
+    position:relative;
+    z-index:0;
+    margin-top:0.25rem;
+  }
+
+  /* Chip list: fit within viewport without pushing content */
   .chips{
     max-height:45vh;
     overflow:auto;
+    -webkit-overflow-scrolling:touch;
   }
+}
+
+/* Optional: only enable sticky on wider screens (tablets/desktops).
+   This prevents any sticky edge-cases on phones entirely. */
+@media (min-width: 901px){
+  .controls{ position:sticky; top:1rem; }
+}
