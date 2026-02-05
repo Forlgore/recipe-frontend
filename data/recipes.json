@@ -1,0 +1,690 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Creamy Lemon-Dill Chicken & Rice Casserole",
+      "servings": 4,
+      "tags": [
+        "chicken",
+        "casserole",
+        "lemon",
+        "dill",
+        "oven",
+        "rice"
+      ],
+      "ingredients": [
+        {
+          "amount": "500 g",
+          "item": "chicken breast",
+          "notes": "cubed"
+        },
+        {
+          "amount": "1 cup",
+          "item": "uncooked brown or basmati rice"
+        },
+        {
+          "amount": "2 cups",
+          "item": "chicken broth",
+          "notes": "unsalted"
+        },
+        {
+          "amount": "1 cup",
+          "item": "plain Greek yogurt"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "fresh dill",
+          "notes": "chopped"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "lemon zest"
+        },
+        {
+          "amount": "2 tbsp",
+          "item": "lemon juice"
+        },
+        {
+          "amount": "1 cup",
+          "item": "spinach",
+          "optional": true
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "onion powder"
+        },
+        {
+          "amount": null,
+          "item": "salt & pepper"
+        }
+      ],
+      "instructions": [
+        "Preheat oven to 190°C / 375°F.",
+        "In a baking dish, combine rice and chicken broth.",
+        "In a bowl, whisk yogurt, dill, lemon zest, lemon juice, garlic powder, and onion powder.",
+        "Add cubed chicken to the mixture and fold to coat.",
+        "Pour chicken mixture over rice. Cover tightly with foil.",
+        "Bake 45–50 minutes, until rice is cooked.",
+        "Stir in spinach (optional), season, and serve warm."
+      ],
+      "ingredientTags": [
+        "chicken-breast",
+        "chicken-broth",
+        "dill",
+        "garlic-powder",
+        "lemon-juice",
+        "lemon-zest",
+        "onion-powder",
+        "plain-greek-yogurt",
+        "salt-pepper",
+        "spinach",
+        "uncooked-brown-basmati-rice"
+      ],
+      "ingredientAtoms": [
+        "basmati",
+        "breast",
+        "broth",
+        "brown",
+        "chicken",
+        "dill",
+        "garlic",
+        "juice",
+        "lemon",
+        "onion",
+        "pepper",
+        "plain",
+        "powder",
+        "rice",
+        "salt",
+        "spinach",
+        "uncooked",
+        "yogurt",
+        "zest"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Spicy Chicken & Cabbage Stir-Fry",
+      "servings": 2,
+      "tags": [
+        "chicken",
+        "stir-fry",
+        "spicy",
+        "stovetop",
+        "low-carb"
+      ],
+      "ingredients": [
+        {
+          "amount": "300 g",
+          "item": "chicken breast",
+          "notes": "sliced"
+        },
+        {
+          "amount": "2 cups",
+          "item": "shredded cabbage"
+        },
+        {
+          "amount": "1 cup",
+          "item": "sliced bell pepper"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "tamari",
+          "notes": "no sugar"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "chili flakes"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic",
+          "notes": "minced"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "ginger",
+          "notes": "grated"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "olive or sesame oil"
+        }
+      ],
+      "instructions": [
+        "Heat oil in a skillet and cook chicken until browned.",
+        "Add cabbage and peppers; sauté 3–5 minutes.",
+        "Add tamari, garlic, ginger, and chili flakes.",
+        "Cook 1 more minute and serve hot."
+      ],
+      "ingredientTags": [
+        "bell-pepper",
+        "chicken-breast",
+        "chili-flakes",
+        "garlic",
+        "ginger",
+        "oil",
+        "shredded-cabbage",
+        "tamari"
+      ],
+      "ingredientAtoms": [
+        "breast",
+        "cabbage",
+        "chicken",
+        "chili",
+        "flakes",
+        "garlic",
+        "ginger",
+        "oil",
+        "pepper",
+        "shredded",
+        "tamari"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Brothy Lemon-Garlic Beans & Brussels Sprouts Caesar Salad",
+      "servings": 2,
+      "tags": [
+        "beans",
+        "brussels sprouts",
+        "salad",
+        "stovetop",
+        "quick"
+      ],
+      "components": [
+        {
+          "component_name": "Brothy Lemon-Garlic Beans",
+          "ingredients": [
+            {
+              "amount": "1 can",
+              "item": "white beans",
+              "notes": "rinsed"
+            },
+            {
+              "amount": "2 cups",
+              "item": "broth"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 clove",
+              "item": "garlic",
+              "notes": "minced"
+            },
+            {
+              "amount": null,
+              "item": "salt, pepper, thyme"
+            }
+          ],
+          "instructions": [
+            "Simmer beans with broth, lemon, garlic, and thyme for 10 minutes."
+          ]
+        },
+        {
+          "component_name": "Brussels Sprouts Caesar",
+          "ingredients": [
+            {
+              "amount": "2 cups",
+              "item": "shaved Brussels sprouts"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive oil"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive-oil mayo"
+            },
+            {
+              "amount": "1 tsp",
+              "item": "Dijon mustard"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "parmesan"
+            }
+          ],
+          "instructions": [
+            "Mix dressing, toss with shaved sprouts, top with parmesan."
+          ]
+        }
+      ],
+      "ingredientTags": [
+        "broth",
+        "dijon-mustard",
+        "garlic",
+        "lemon-juice",
+        "olive-oil",
+        "olive-oil-mayo",
+        "parmesan",
+        "salt-pepper-thyme",
+        "shaved-brussels-sprouts",
+        "white-beans"
+      ],
+      "ingredientAtoms": [
+        "bean",
+        "broth",
+        "brussels",
+        "garlic",
+        "juice",
+        "lemon",
+        "mayo",
+        "mustard",
+        "oil",
+        "olive",
+        "parmesan",
+        "pepper",
+        "salt",
+        "shaved",
+        "sprouts",
+        "thyme",
+        "white"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "High-Protein Enchilada Skillet",
+      "servings": 2.5,
+      "tags": [
+        "chicken or turkey",
+        "skillet",
+        "enchilada",
+        "high-protein"
+      ],
+      "ingredients": [
+        {
+          "amount": "400 g",
+          "item": "ground chicken or turkey"
+        },
+        {
+          "amount": "1 cup",
+          "item": "diced tomatoes",
+          "notes": "no sugar"
+        },
+        {
+          "amount": "1/2 cup",
+          "item": "black beans",
+          "optional": true
+        },
+        {
+          "amount": "1 tsp",
+          "item": "cumin"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "paprika"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1/2 cup",
+          "item": "shredded cheese",
+          "optional": true
+        },
+        {
+          "amount": null,
+          "item": "fresh cilantro"
+        }
+      ],
+      "instructions": [
+        "Brown meat in a skillet.",
+        "Add tomatoes, spices, and optional beans.",
+        "Simmer 5 minutes.",
+        "Top with cheese and melt.",
+        "Garnish with cilantro."
+      ],
+      "ingredientTags": [
+        "black-beans",
+        "cilantro",
+        "cumin",
+        "garlic-powder",
+        "ground-chicken-turkey",
+        "paprika",
+        "shredded-cheese",
+        "tomatoes"
+      ],
+      "ingredientAtoms": [
+        "bean",
+        "cheese",
+        "chicken",
+        "cilantro",
+        "cumin",
+        "garlic",
+        "ground",
+        "paprika",
+        "powder",
+        "shredded",
+        "tomatoes",
+        "turkey"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Sheet-Pan Mojo Chicken with Green Beans & Potatoes",
+      "servings": 4,
+      "tags": [
+        "chicken",
+        "sheet-pan",
+        "mojo",
+        "oven"
+      ],
+      "ingredients": [
+        {
+          "amount": "4",
+          "item": "chicken thighs or breasts"
+        },
+        {
+          "amount": "2 cups",
+          "item": "green beans"
+        },
+        {
+          "amount": "2 cups",
+          "item": "diced potatoes"
+        },
+        {
+          "amount": "2 tbsp",
+          "item": "olive oil"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "lime juice"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "orange juice",
+          "notes": "optional natural, no added sugar"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "cumin"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "oregano"
+        }
+      ],
+      "instructions": [
+        "Heat oven to 200°C / 400°F.",
+        "Mix oil, citrus, garlic, cumin, oregano.",
+        "Toss chicken and vegetables with the marinade.",
+        "Spread on sheet pan and bake 30–35 minutes."
+      ],
+      "ingredientTags": [
+        "chicken-thighs-breasts",
+        "cumin",
+        "garlic-powder",
+        "green-beans",
+        "lime-juice",
+        "olive-oil",
+        "orange-juice",
+        "oregano",
+        "potatoes"
+      ],
+      "ingredientAtoms": [
+        "bean",
+        "breasts",
+        "chicken",
+        "cumin",
+        "garlic",
+        "green",
+        "juice",
+        "lime",
+        "oil",
+        "olive",
+        "orange",
+        "oregano",
+        "potatoes",
+        "powder",
+        "thighs"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "High-Protein Lemon Chicken & Rice Skillet",
+      "servings": 2,
+      "tags": [
+        "chicken",
+        "lemon",
+        "skillet",
+        "rice",
+        "high-protein"
+      ],
+      "ingredients": [
+        {
+          "amount": "300 g",
+          "item": "chicken breast",
+          "notes": "diced"
+        },
+        {
+          "amount": "1 cup",
+          "item": "cooked rice"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "lemon zest"
+        },
+        {
+          "amount": "2 tbsp",
+          "item": "lemon juice"
+        },
+        {
+          "amount": "1/2 cup",
+          "item": "Greek yogurt"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1 cup",
+          "item": "spinach"
+        },
+        {
+          "amount": null,
+          "item": "salt & pepper"
+        }
+      ],
+      "instructions": [
+        "Sauté chicken until browned.",
+        "Add garlic powder, lemon zest, lemon juice.",
+        "Stir in cooked rice and spinach.",
+        "Remove from heat; fold in yogurt until creamy.",
+        "Season and serve."
+      ],
+      "ingredientTags": [
+        "chicken-breast",
+        "cooked-rice",
+        "garlic-powder",
+        "greek-yogurt",
+        "lemon-juice",
+        "lemon-zest",
+        "salt-pepper",
+        "spinach"
+      ],
+      "ingredientAtoms": [
+        "breast",
+        "chicken",
+        "cooked",
+        "garlic",
+        "juice",
+        "lemon",
+        "pepper",
+        "powder",
+        "rice",
+        "salt",
+        "spinach",
+        "yogurt",
+        "zest"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Za’atar-Roasted Chicken with Chickpeas",
+      "servings": 3.5,
+      "tags": [
+        "chicken",
+        "za'atar",
+        "roasted",
+        "oven",
+        "chickpeas"
+      ],
+      "ingredients": [
+        {
+          "amount": "4",
+          "item": "chicken thighs",
+          "notes": "or 2 breasts"
+        },
+        {
+          "amount": "1 can",
+          "item": "chickpeas",
+          "notes": "drained"
+        },
+        {
+          "amount": "2 tbsp",
+          "item": "olive oil"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "za’atar"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "lemon juice"
+        },
+        {
+          "amount": null,
+          "item": "salt & pepper"
+        }
+      ],
+      "instructions": [
+        "Heat oven to 200°C / 400°F.",
+        "Toss chickpeas with half the oil + 1/2 tbsp za’atar.",
+        "Coat chicken with remaining oil + za’atar + garlic + lemon.",
+        "Place chicken and chickpeas on a pan.",
+        "Roast 28–32 minutes, until chicken is cooked and chickpeas crisp."
+      ],
+      "ingredientTags": [
+        "chicken-thighs",
+        "chickpeas",
+        "garlic-powder",
+        "lemon-juice",
+        "olive-oil",
+        "salt-pepper",
+        "za-atar"
+      ],
+      "ingredientAtoms": [
+        "chicken",
+        "chickpea",
+        "garlic",
+        "juice",
+        "lemon",
+        "oil",
+        "olive",
+        "pepper",
+        "powder",
+        "salt",
+        "thighs",
+        "zaatar"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Ground Turkey Fajita Bowls",
+      "servings": 2.5,
+      "tags": [
+        "turkey",
+        "fajita",
+        "bowls",
+        "stovetop",
+        "low-carb"
+      ],
+      "ingredients": [
+        {
+          "amount": "400 g",
+          "item": "ground turkey"
+        },
+        {
+          "amount": "1",
+          "item": "bell pepper",
+          "notes": "sliced"
+        },
+        {
+          "amount": "1",
+          "item": "onion",
+          "notes": "sliced"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "paprika"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "cumin"
+        },
+        {
+          "amount": "1 tsp",
+          "item": "garlic powder"
+        },
+        {
+          "amount": "1 tbsp",
+          "item": "lime juice"
+        },
+        {
+          "amount": null,
+          "item": "cauliflower rice or lettuce base"
+        }
+      ],
+      "instructions": [
+        "Cook turkey with spices.",
+        "Add peppers + onions and sauté until tender.",
+        "Add lime juice.",
+        "Serve over cauliflower rice or lettuce."
+      ],
+      "ingredientTags": [
+        "bell-pepper",
+        "cauliflower-rice-lettuce",
+        "cumin",
+        "garlic-powder",
+        "ground-turkey",
+        "lime-juice",
+        "onion",
+        "paprika"
+      ],
+      "ingredientAtoms": [
+        "cauliflower",
+        "cumin",
+        "garlic",
+        "juice",
+        "lettuce",
+        "lime",
+        "onion",
+        "paprika",
+        "pepper",
+        "powder",
+        "rice",
+        "turkey"
+      ]
+    }
+  ]
+}
