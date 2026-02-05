@@ -2,187 +2,216 @@
   "recipes": [
     {
       "id": 1,
-      "name": "Creamy Lemon-Dill Chicken & Rice Casserole",
-      "servings": 4,
+      "name": "Brothy Lemon-Garlic Beans & Brussels Sprouts Caesar Salad",
+      "servings": 2,
       "tags": [
-        "chicken",
-        "casserole",
-        "lemon",
-        "dill",
-        "oven",
-        "rice"
+        "beans",
+        "brussels sprouts",
+        "salad",
+        "stovetop",
+        "quick"
       ],
-      "ingredients": [
+      "components": [
         {
-          "amount": "500 g",
-          "item": "chicken breast",
-          "notes": "cubed"
+          "component_name": "Brothy Lemon-Garlic Beans",
+          "ingredients": [
+            {
+              "amount": "1 can",
+              "item": "white beans",
+              "notes": "rinsed"
+            },
+            {
+              "amount": "2 cups",
+              "item": "broth"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 clove",
+              "item": "garlic",
+              "notes": "minced"
+            },
+            {
+              "amount": null,
+              "item": "salt, pepper, thyme"
+            }
+          ],
+          "instructions": [
+            "Simmer beans with broth, lemon, garlic, and thyme for 10 minutes."
+          ]
         },
         {
-          "amount": "1 cup",
-          "item": "uncooked brown or basmati rice"
-        },
-        {
-          "amount": "2 cups",
-          "item": "chicken broth",
-          "notes": "unsalted"
-        },
-        {
-          "amount": "1 cup",
-          "item": "plain Greek yogurt"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "fresh dill",
-          "notes": "chopped"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "lemon zest"
-        },
-        {
-          "amount": "2 tbsp",
-          "item": "lemon juice"
-        },
-        {
-          "amount": "1 cup",
-          "item": "spinach",
-          "optional": true
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic powder"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "onion powder"
-        },
-        {
-          "amount": null,
-          "item": "salt & pepper"
+          "component_name": "Brussels Sprouts Caesar",
+          "ingredients": [
+            {
+              "amount": "2 cups",
+              "item": "shaved Brussels sprouts"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive oil"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive-oil mayo"
+            },
+            {
+              "amount": "1 tsp",
+              "item": "Dijon mustard"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "parmesan"
+            }
+          ],
+          "instructions": [
+            "Mix dressing, toss with shaved sprouts, top with parmesan."
+          ]
         }
       ],
-      "instructions": [
-        "Preheat oven to 190°C / 375°F.",
-        "In a baking dish, combine rice and chicken broth.",
-        "In a bowl, whisk yogurt, dill, lemon zest, lemon juice, garlic powder, and onion powder.",
-        "Add cubed chicken to the mixture and fold to coat.",
-        "Pour chicken mixture over rice. Cover tightly with foil.",
-        "Bake 45–50 minutes, until rice is cooked.",
-        "Stir in spinach (optional), season, and serve warm."
-      ],
       "ingredientTags": [
-        "chicken-breast",
-        "chicken-broth",
-        "dill",
-        "garlic-powder",
+        "broth",
+        "dijon-mustard",
+        "garlic",
         "lemon-juice",
-        "lemon-zest",
-        "onion-powder",
-        "plain-greek-yogurt",
-        "salt-pepper",
-        "spinach",
-        "uncooked-brown-basmati-rice"
+        "olive-oil",
+        "olive-oil-mayo",
+        "parmesan",
+        "salt-pepper-thyme",
+        "shaved-brussels-sprouts",
+        "white-beans"
       ],
       "ingredientAtoms": [
-        "basmati",
-        "breast",
+        "bean",
         "broth",
-        "brown",
-        "chicken",
-        "dill",
+        "brussels",
         "garlic",
         "juice",
         "lemon",
-        "onion",
+        "mayo",
+        "mustard",
+        "oil",
+        "olive",
+        "parmesan",
         "pepper",
-        "plain",
-        "powder",
-        "rice",
         "salt",
-        "spinach",
-        "uncooked",
-        "yogurt",
-        "zest"
+        "shaved",
+        "sprouts",
+        "thyme",
+        "white"
       ]
     },
     {
       "id": 2,
-      "name": "Spicy Chicken & Cabbage Stir-Fry",
+      "name": "Brothy Lemon-Garlic Beans & Brussels Sprouts Caesar Salad",
       "servings": 2,
       "tags": [
-        "chicken",
-        "stir-fry",
-        "spicy",
+        "beans",
+        "brussels sprouts",
+        "salad",
         "stovetop",
-        "low-carb"
+        "quick"
       ],
-      "ingredients": [
+      "components": [
         {
-          "amount": "300 g",
-          "item": "chicken breast",
-          "notes": "sliced"
+          "component_name": "Brothy Lemon-Garlic Beans",
+          "ingredients": [
+            {
+              "amount": "1 can",
+              "item": "white beans",
+              "notes": "rinsed"
+            },
+            {
+              "amount": "2 cups",
+              "item": "broth"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 clove",
+              "item": "garlic",
+              "notes": "minced"
+            },
+            {
+              "amount": null,
+              "item": "salt, pepper, thyme"
+            }
+          ],
+          "instructions": [
+            "Simmer beans with broth, lemon, garlic, and thyme for 10 minutes."
+          ]
         },
         {
-          "amount": "2 cups",
-          "item": "shredded cabbage"
-        },
-        {
-          "amount": "1 cup",
-          "item": "sliced bell pepper"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "tamari",
-          "notes": "no sugar"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "chili flakes"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic",
-          "notes": "minced"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "ginger",
-          "notes": "grated"
-        },
-        {
-          "amount": "1 tbsp",
-          "item": "olive or sesame oil"
+          "component_name": "Brussels Sprouts Caesar",
+          "ingredients": [
+            {
+              "amount": "2 cups",
+              "item": "shaved Brussels sprouts"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive oil"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "lemon juice"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "olive-oil mayo"
+            },
+            {
+              "amount": "1 tsp",
+              "item": "Dijon mustard"
+            },
+            {
+              "amount": "1 tbsp",
+              "item": "parmesan"
+            }
+          ],
+          "instructions": [
+            "Mix dressing, toss with shaved sprouts, top with parmesan."
+          ]
         }
       ],
-      "instructions": [
-        "Heat oil in a skillet and cook chicken until browned.",
-        "Add cabbage and peppers; sauté 3–5 minutes.",
-        "Add tamari, garlic, ginger, and chili flakes.",
-        "Cook 1 more minute and serve hot."
-      ],
       "ingredientTags": [
-        "bell-pepper",
-        "chicken-breast",
-        "chili-flakes",
+        "broth",
+        "dijon-mustard",
         "garlic",
-        "ginger",
-        "oil",
-        "shredded-cabbage",
-        "tamari"
+        "lemon-juice",
+        "olive-oil",
+        "olive-oil-mayo",
+        "parmesan",
+        "salt-pepper-thyme",
+        "shaved-brussels-sprouts",
+        "white-beans"
       ],
       "ingredientAtoms": [
-        "breast",
-        "cabbage",
-        "chicken",
-        "chili",
-        "flakes",
+        "bean",
+        "broth",
+        "brussels",
         "garlic",
-        "ginger",
+        "juice",
+        "lemon",
+        "mayo",
+        "mustard",
         "oil",
+        "olive",
+        "parmesan",
         "pepper",
-        "shredded",
-        "tamari"
+        "salt",
+        "shaved",
+        "sprouts",
+        "thyme",
+        "white"
       ]
     },
     {
