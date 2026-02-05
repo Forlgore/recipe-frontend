@@ -41,7 +41,6 @@ function renderTagSelectOnce() {
 }
 
 function renderAtomChips() {
-  // Only re-render the chips area, not the entire controls panel.
   const box = $('#atomChips');
   if (!box) return;
   const filter = $('#atomFilter').value.trim().toLowerCase();
@@ -55,7 +54,6 @@ function renderAtomChips() {
       chip.textContent = atom;
       chip.setAttribute('aria-pressed', state.selectedAtoms.has(atom));
       chip.addEventListener('click', () => {
-        // Toggle selection, then re-render only chips + results
         if (state.selectedAtoms.has(atom)) state.selectedAtoms.delete(atom);
         else state.selectedAtoms.add(atom);
         renderAtomChips();
@@ -96,45 +94,70 @@ function renderResults() {
     const node = tmpl.content.cloneNode(true);
     node.querySelector('.card-title').textContent = r.name;
     node.querySelector('.meta').textContent = `Servings: ${r.servings ?? ''}`;
+
+    // Render tags
     const tg = node.querySelector('.tags');
+    tg.innerHTML = '';
     r.tags.forEach(t => {
       const span = document.createElement('span');
-      span.className = 'tag'; span.textContent = t; tg.appendChild(span);
+      span.className = 'tag';
+      span.textContent = t;
+      tg.appendChild(span);
+      tg.appendChild(document.createTextNode(' '));
     });
+
+    // Render ingredients
     const ingBox = node.querySelector('.ingredients');
-    const insBox = node.querySelector('.instructions');
+    ingBox.innerHTML = '';
+    const ingHeader = document.createElement('h4');
+    ingHeader.textContent = 'Ingredients';
+    ingBox.appendChild(ingHeader);
+    const ul = document.createElement('ul');
     if (r.components) {
       r.components.forEach(c => {
         if (c.ingredients) {
-          const h = document.createElement('h4'); h.textContent = c.component_name; ingBox.appendChild(h);
-          const ul = document.createElement('ul');
-          (c.ingredients||[]).forEach(i => {
+          c.ingredients.forEach(i => {
             const li = document.createElement('li');
-            li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
+            li.textContent = [i.amount, i.item, i.notes, i.optional ? '(optional)' : ''].filter(Boolean).join(' ');
             ul.appendChild(li);
           });
-          ingBox.appendChild(ul);
-        }
-        if (c.instructions) {
-          const ol = document.createElement('ol');
-          (c.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
-          insBox.appendChild(ol);
         }
       });
-    } else {
-      const h = document.createElement('h4'); h.textContent = 'Ingredients'; ingBox.appendChild(h);
-      const ul = document.createElement('ul');
-      (r.ingredients||[]).forEach(i => {
+    } else if (r.ingredients) {
+      r.ingredients.forEach(i => {
         const li = document.createElement('li');
-        li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
+        li.textContent = [i.amount, i.item, i.notes, i.optional ? '(optional)' : ''].filter(Boolean).join(' ');
         ul.appendChild(li);
       });
-      ingBox.appendChild(ul);
-      const h2 = document.createElement('h4'); h2.textContent = 'Instructions'; insBox.appendChild(h2);
-      const ol = document.createElement('ol');
-      (r.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
-      insBox.appendChild(ol);
     }
+    ingBox.appendChild(ul);
+
+    // Render instructions
+    const insBox = node.querySelector('.instructions');
+    insBox.innerHTML = '';
+    const insHeader = document.createElement('h4');
+    insHeader.textContent = 'Instructions:';
+    insBox.appendChild(insHeader);
+    const ol = document.createElement('ol');
+    if (r.components) {
+      r.components.forEach(c => {
+        if (c.instructions) {
+          c.instructions.forEach(step => {
+            const li = document.createElement('li');
+            li.textContent = step;
+            ol.appendChild(li);
+          });
+        }
+      });
+    } else if (r.instructions) {
+      r.instructions.forEach(step => {
+        const li = document.createElement('li');
+        li.textContent = step;
+        ol.appendChild(li);
+      });
+    }
+    insBox.appendChild(ol);
+
     list.appendChild(node);
   });
 
@@ -172,7 +195,7 @@ function bindControlEvents() {
     updateURL();
   });
 
-  // Tags multi-select (do not rebuild options during render)
+  // Tags multi-select
   $('#tagSelect').addEventListener('change', e => {
     const selected = Array.from(e.target.selectedOptions).map(o=>o.value);
     state.tags = new Set(selected);
@@ -180,7 +203,7 @@ function bindControlEvents() {
     updateURL();
   });
 
-  // AND/OR radios — select by CLASS, not ID
+  // AND/OR radios
   document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => {
     r.addEventListener('change', e => {
       state.mode = e.target.value;
@@ -202,7 +225,6 @@ function bindControlEvents() {
     state.mode = 'and';
     $('#q').value = '';
     $('#atomFilter').value = '';
-    // Reset radios to AND
     document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => r.checked = (r.value === 'and'));
     renderAtomChips();
     renderResults();
@@ -213,9 +235,9 @@ function bindControlEvents() {
 (async function init() {
   await loadData();
   restoreFromURL();
-  renderTagSelectOnce();   // build tag options once
-  bindControlEvents();     // bind once
-  renderAtomChips();       // render chips area
-  renderResults();         // render cards
+  renderTagSelectOnce();
+  bindControlEvents();
+  renderAtomChips();
+  renderResults();
   updateURL();
 })();
