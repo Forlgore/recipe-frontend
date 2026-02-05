@@ -302,56 +302,58 @@
         "enchilada",
         "high-protein"
       ],
-      "ingredients": [
+      "components": [
         {
-          "amount": "400 g",
-          "item": "ground chicken or turkey"
-        },
-        {
-          "amount": "1 cup",
-          "item": "diced tomatoes",
-          "notes": "no sugar"
-        },
-        {
-          "amount": "1/2 cup",
-          "item": "black beans",
-          "optional": true
-        },
-        {
-          "amount": "1 tsp",
-          "item": "cumin"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "paprika"
-        },
-        {
-          "amount": "1 tsp",
-          "item": "garlic powder"
-        },
-        {
-          "amount": "1/2 cup",
-          "item": "shredded cheese",
-          "optional": true
-        },
-        {
-          "amount": null,
-          "item": "fresh cilantro"
-        }
+          "component_name": "High-Protein Enchilada Skillet",
+          "ingredients": [
+            {
+              "amount": "400g",
+              "item": "chicken",
+              "notes": "or turkey"
+            },
+            {
+              "amount": "1 cups",
+              "item": "diced tomatoes"
+            },
+            {
+              "amount": "½ cup",
+              "item": "black beans"
+            },
+            {
+              "amount": "1 tsp ",
+              "item": "cumin"
+            },
+            {
+              "amount": "1 tsp ",
+              "item": "paprika"
+            },
+            {
+              "amount": "1 tsp ",
+              "item": "garlic powder"
+            },
+            {
+              "amount": "½ cup",
+              "item": "shredded cheese",
+            },
+            {
+              "amount": "1 branch",
+              "item": "Fresh cilantro"
+            }
       ],
       "instructions": [
-        "Brown meat in a skillet.",
-        "Add tomatoes, spices, and optional beans.",
-        "Simmer 5 minutes.",
-        "Top with cheese and melt.",
-        "Garnish with cilantro."
+        "1.	Brown meat in a skillet.",
+        "2.	Add tomatoes, spices, and optional beans.",
+        "3.	Simmer 5 minutes.",
+        "4.	Top with cheese and melt.",
+        "5.	Garnish with cilantro."
       ],
       "ingredientTags": [
         "black-beans",
         "cilantro",
         "cumin",
         "garlic-powder",
-        "ground-chicken-turkey",
+        "chicken",
+        "turkey",
         "paprika",
         "shredded-cheese",
         "tomatoes"
