@@ -1,10 +1,8 @@
 // assets/app.js
-'use strict';
-
 const state = {
   data: null,
   selectedAtoms: new Set(),
-  mode: 'and', // 'and' | 'or'
+  mode: 'and', // 'and'|'or'
   q: '',
   tags: new Set(),
   facets: { allTags: [], allAtoms: [] } // cached after load
@@ -13,85 +11,51 @@ const state = {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-// --- Utilities ---
-function ensureChild(container, selector, creator) {
-  let node = container.querySelector(selector);
-  if (!node) {
-    node = creator();
-    container.appendChild(node);
-  }
-  return node;
-}
-
 async function loadData() {
-  const list = $('#results');
-  try {
-    const res = await fetch('data/recipes.json', { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status} while fetching data/recipes.json`);
-    }
-    const json = await res.json();
+  const res = await fetch('data/recipes.json');
+  const json = await res.json();
+  json.recipes.forEach(r => {
+    r.tags = r.tags || [];
+    r.ingredientTags = r.ingredientTags || [];
+    r.ingredientAtoms = r.ingredientAtoms || [];
+  });
+  state.data = json;
 
-    if (!json || !Array.isArray(json.recipes)) {
-      throw new Error('Invalid JSON structure: expected { recipes: [...] }');
-    }
-
-    json.recipes.forEach((r) => {
-      r.tags = r.tags || [];
-      r.ingredientTags = r.ingredientTags || [];
-      r.ingredientAtoms = r.ingredientAtoms || [];
-      // Normalize optional top-level fallback arrays
-      r.ingredients = r.ingredients || [];
-      r.instructions = r.instructions || [];
-    });
-
-    state.data = json;
-
-    // Build global facets ONCE (from full dataset; not filtered),
-    // so chips don't "disappear" during interaction.
-    const uniqueSorted = (arr) => [...new Set(arr)].sort((a, b) => a.localeCompare(b));
-    state.facets.allTags = uniqueSorted(json.recipes.flatMap((r) => r.tags || []));
-    state.facets.allAtoms = uniqueSorted(json.recipes.flatMap((r) => r.ingredientAtoms || []));
-  } catch (err) {
-    console.error('[loadData] Failed to load recipes.json:', err);
-    if (list) {
-      list.innerHTML = '';
-      const div = document.createElement('div');
-      div.className = 'error';
-      div.textContent = 'Failed to load recipes data. Ensure you run a local web server and that data/recipes.json is reachable.';
-      list.appendChild(div);
-    }
-    throw err;
-  }
+  // Build global facets ONCE (from full dataset; not filtered),
+  // so chips don't "disappear" during interaction.
+  const uniqueSorted = (arr) => [...new Set(arr)].sort((a,b)=>a.localeCompare(b));
+  state.facets.allTags  = uniqueSorted(json.recipes.flatMap(r => r.tags || []));
+  state.facets.allAtoms = uniqueSorted(json.recipes.flatMap(r => r.ingredientAtoms || []));
 }
 
 function renderTagSelectOnce() {
   const sel = $('#tagSelect');
   if (!sel || sel.dataset.bound === '1') return;
   sel.innerHTML = '';
-  state.facets.allTags.forEach((t) => {
+  state.facets.allTags.forEach(t => {
     const opt = document.createElement('option');
-    opt.value = t;
-    opt.textContent = t;
+    opt.value = t; opt.textContent = t;
     sel.appendChild(opt);
   });
   sel.dataset.bound = '1';
 }
 
 function renderAtomChips() {
+  // Only re-render the chips area, not the entire controls panel.
   const box = $('#atomChips');
   if (!box) return;
-  const filter = ($('#atomFilter')?.value || '').trim().toLowerCase();
+  const filter = $('#atomFilter').value.trim().toLowerCase();
   box.innerHTML = '';
-  (state.facets.allAtoms || [])
-    .filter((a) => (a || '').toLowerCase().includes(filter))
-    .forEach((atom) => {
+  state.facets.allAtoms
+    .filter(a => a.includes(filter))
+    .forEach(atom => {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'chip' + (state.selectedAtoms.has(atom) ? ' selected' : '');
       chip.textContent = atom;
       chip.setAttribute('aria-pressed', state.selectedAtoms.has(atom));
       chip.addEventListener('click', () => {
+        // Toggle selection, then re-render only chips + results
         if (state.selectedAtoms.has(atom)) state.selectedAtoms.delete(atom);
         else state.selectedAtoms.add(atom);
         renderAtomChips();
@@ -103,182 +67,73 @@ function renderAtomChips() {
 }
 
 function matchRecipe(r) {
-  const q = (state.q || '').toLowerCase();
+  const q = state.q.toLowerCase();
   if (q) {
-    const hay = [r.name, ...(r.tags || []), ...(r.ingredientTags || []), ...(r.ingredientAtoms || [])]
-      .join(' ')
-      .toLowerCase();
+    const hay = [r.name, ...(r.tags||[]), ...(r.ingredientTags||[]), ...(r.ingredientAtoms||[])]
+      .join(' ').toLowerCase();
     if (!hay.includes(q)) return false;
   }
   if (state.tags.size) {
-    if (![...state.tags].every((t) => r.tags.includes(t))) return false;
+    if (![...state.tags].every(t => r.tags.includes(t))) return false;
   }
   const atoms = [...state.selectedAtoms];
   if (atoms.length) {
     return state.mode === 'and'
-      ? atoms.every((a) => r.ingredientAtoms.includes(a))
-      : atoms.some((a) => r.ingredientAtoms.includes(a));
+      ? atoms.every(a => r.ingredientAtoms.includes(a))
+      : atoms.some(a => r.ingredientAtoms.includes(a));
   }
   return true;
 }
 
 function renderResults() {
   const list = $('#results');
-  if (!list) {
-    console.error('[renderResults] #results container not found.');
-    return;
-  }
-
   list.innerHTML = '';
-
-  if (!state.data || !Array.isArray(state.data.recipes)) {
-    console.error('[renderResults] No data loaded or invalid structure.');
-    const div = document.createElement('div');
-    div.textContent = 'No data available.';
-    list.appendChild(div);
-    return;
-  }
-
   let results = state.data.recipes.filter(matchRecipe);
-  results.sort((a, b) => a.name.localeCompare(b.name));
+  results.sort((a,b)=>a.name.localeCompare(b.name));
 
   const tmpl = document.getElementById('recipeCardTmpl');
-  if (!tmpl || !('content' in tmpl)) {
-    console.error('[renderResults] Missing <template id="recipeCardTmpl"> or template not supported.');
-    const div = document.createElement('div');
-    div.textContent = 'Template not found. Please include a <template id="recipeCardTmpl"> in your HTML.';
-    list.appendChild(div);
-    return;
-  }
-
-  try {
-    results.forEach((r) => {
-      const node = tmpl.content.cloneNode(true);
-
-      // Ensure required containers exist in the cloned node
-      const titleEl = ensureChild(node, '.card-title', () => {
-        const h3 = document.createElement('h3');
-        h3.className = 'card-title';
-        return h3;
-      });
-      const metaEl = ensureChild(node, '.meta', () => {
-        const p = document.createElement('p');
-        p.className = 'meta';
-        return p;
-      });
-      const tagsEl = ensureChild(node, '.tags', () => {
-        const div = document.createElement('div');
-        div.className = 'tags';
-        return div;
-      });
-      const ingBox = ensureChild(node, '.ingredients', () => {
-        const div = document.createElement('div');
-        div.className = 'ingredients';
-        return div;
-      });
-      const insBox = ensureChild(node, '.instructions', () => {
-        const div = document.createElement('div');
-        div.className = 'instructions';
-        return div;
-      });
-
-      titleEl.textContent = r.name || '';
-      metaEl.textContent = `Servings: ${r.servings ?? ''}`;
-
-      tagsEl.innerHTML = '';
-      (r.tags || []).forEach((t) => {
-        const span = document.createElement('span');
-        span.className = 'tag';
-        span.textContent = t;
-        tagsEl.appendChild(span);
-      });
-
-      // Clear containers in case template had placeholders
-      ingBox.innerHTML = '';
-      insBox.innerHTML = '';
-
-      // Render components conditionally, or fallback to top-level
-      let renderedIngredients = false;
-      let renderedInstructions = false;
-
-      if (Array.isArray(r.components) && r.components.length) {
-        r.components.forEach((c) => {
-          // Ingredients block
-          if (Array.isArray(c.ingredients) && c.ingredients.length) {
-            const h = document.createElement('h4');
-            h.textContent = c.component_name || 'Ingredients';
-            ingBox.appendChild(h);
-
-            const ul = document.createElement('ul');
-            c.ingredients.forEach((i) => {
-              const li = document.createElement('li');
-              li.textContent = [i.amount, i.item, i.notes, i.optional ? '(optional)' : '']
-                .filter(Boolean)
-                .join(' ');
-              ul.appendChild(li);
-            });
-            ingBox.appendChild(ul);
-            renderedIngredients = true;
-          }
-
-          // Instructions block
-          if (Array.isArray(c.instructions) && c.instructions.length) {
-            const h2 = document.createElement('h4');
-            h2.textContent = c.component_name || 'Instructions';
-            insBox.appendChild(h2);
-
-            const ol = document.createElement('ol');
-            c.instructions.forEach((step) => {
-              const li = document.createElement('li');
-              li.textContent = step;
-              ol.appendChild(li);
-            });
-            insBox.appendChild(ol);
-            renderedInstructions = true;
-          }
-        });
-      }
-
-      // Fallbacks: if components present but had no valid arrays, use top-level
-      if (!renderedIngredients && Array.isArray(r.ingredients) && r.ingredients.length) {
-        const h = document.createElement('h4');
-        h.textContent = 'Ingredients';
-        ingBox.appendChild(h);
-
+  results.forEach(r => {
+    const node = tmpl.content.cloneNode(true);
+    node.querySelector('.card-title').textContent = r.name;
+    node.querySelector('.meta').textContent = `Servings: ${r.servings ?? ''}`;
+    const tg = node.querySelector('.tags');
+    r.tags.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'tag'; span.textContent = t; tg.appendChild(span);
+    });
+    const ingBox = node.querySelector('.ingredients');
+    const insBox = node.querySelector('.instructions');
+    if (r.components) {
+      r.components.forEach(c => {
+        const h = document.createElement('h4'); h.textContent = c.component_name; ingBox.appendChild(h);
         const ul = document.createElement('ul');
-        r.ingredients.forEach((i) => {
+        (c.ingredients||[]).forEach(i => {
           const li = document.createElement('li');
-          li.textContent = [i.amount, i.item, i.notes, i.optional ? '(optional)' : '']
-            .filter(Boolean)
-            .join(' ');
+          li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
           ul.appendChild(li);
         });
         ingBox.appendChild(ul);
-      }
-
-      if (!renderedInstructions && Array.isArray(r.instructions) && r.instructions.length) {
-        const h2 = document.createElement('h4');
-        h2.textContent = 'Instructions';
-        insBox.appendChild(h2);
-
+        const h2 = document.createElement('h4'); h2.textContent = c.component_name + ' – Steps'; insBox.appendChild(h2);
         const ol = document.createElement('ol');
-        r.instructions.forEach((step) => {
-          const li = document.createElement('li');
-          li.textContent = step;
-          ol.appendChild(li);
-        });
+        (c.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
         insBox.appendChild(ol);
-      }
-
-      list.appendChild(node);
-    });
-  } catch (err) {
-    console.error('[renderResults] Rendering error:', err);
-    const div = document.createElement('div');
-    div.className = 'error';
-    div.textContent = 'An error occurred while rendering recipes. Check the console for details.';
-    list.appendChild(div);
-  }
+      });
+    } else {
+      const h = document.createElement('h4'); h.textContent = 'Ingredients'; ingBox.appendChild(h);
+      const ul = document.createElement('ul');
+      (r.ingredients||[]).forEach(i => {
+        const li = document.createElement('li');
+        li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
+        ul.appendChild(li);
+      });
+      ingBox.appendChild(ul);
+      const h2 = document.createElement('h4'); h2.textContent = 'Instructions'; insBox.appendChild(h2);
+      const ol = document.createElement('ol');
+      (r.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
+      insBox.appendChild(ol);
+    }
+    list.appendChild(node);
+  });
 
   if (!results.length) {
     const div = document.createElement('div');
@@ -299,44 +154,32 @@ function updateURL() {
 function restoreFromURL() {
   const url = new URL(location.href);
   const q = url.searchParams.get('q') || '';
-  const tags = (url.searchParams.get('tags') || '').split(',').filter(Boolean);
-  const atoms = (url.searchParams.get('atoms') || '').split(',').filter(Boolean);
+  const tags = (url.searchParams.get('tags')||'').split(',').filter(Boolean);
+  const atoms = (url.searchParams.get('atoms')||'').split(',').filter(Boolean);
   const mode = url.searchParams.get('mode') || 'and';
-
-  const qInput = $('#q');
-  if (qInput) qInput.value = q;
-
-  state.q = q;
-  state.mode = mode;
-  state.tags = new Set(tags);
-  state.selectedAtoms = new Set(atoms);
+  $('#q').value = q; state.q = q; state.mode = mode;
+  state.tags = new Set(tags); state.selectedAtoms = new Set(atoms);
 }
 
 function bindControlEvents() {
   // Search box
-  const qEl = $('#q');
-  if (qEl) {
-    qEl.addEventListener('input', (e) => {
-      state.q = e.target.value.trim();
-      renderResults();
-      updateURL();
-    });
-  }
+  $('#q').addEventListener('input', e => {
+    state.q = e.target.value.trim();
+    renderResults();
+    updateURL();
+  });
 
   // Tags multi-select (do not rebuild options during render)
-  const tagSelect = $('#tagSelect');
-  if (tagSelect) {
-    tagSelect.addEventListener('change', (e) => {
-      const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
-      state.tags = new Set(selected);
-      renderResults();
-      updateURL();
-    });
-  }
+  $('#tagSelect').addEventListener('change', e => {
+    const selected = Array.from(e.target.selectedOptions).map(o=>o.value);
+    state.tags = new Set(selected);
+    renderResults();
+    updateURL();
+  });
 
   // AND/OR radios — select by CLASS, not ID
-  document.querySelectorAll('.atom-mode input[name="mode"]').forEach((r) => {
-    r.addEventListener('change', (e) => {
+  document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => {
+    r.addEventListener('change', e => {
       state.mode = e.target.value;
       renderResults();
       updateURL();
@@ -344,54 +187,32 @@ function bindControlEvents() {
   });
 
   // Live filter for the chips list
-  const atomFilter = $('#atomFilter');
-  if (atomFilter) {
-    atomFilter.addEventListener('input', () => {
-      renderAtomChips();
-    });
-  }
+  $('#atomFilter').addEventListener('input', () => {
+    renderAtomChips();
+  });
 
   // Clear filters
-  const clearBtn = $('#clearBtn');
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      state.q = '';
-      state.tags.clear();
-      state.selectedAtoms.clear();
-      state.mode = 'and';
-
-      const qInput = $('#q');
-      if (qInput) qInput.value = '';
-
-      const atomFilterInput = $('#atomFilter');
-      if (atomFilterInput) atomFilterInput.value = '';
-
-      // Reset radios to AND
-      document.querySelectorAll('.atom-mode input[name="mode"]').forEach((r) => {
-        r.checked = r.value === 'and';
-      });
-
-      renderAtomChips();
-      renderResults();
-      updateURL();
-    });
-  }
+  $('#clearBtn').addEventListener('click', () => {
+    state.q = '';
+    state.tags.clear();
+    state.selectedAtoms.clear();
+    state.mode = 'and';
+    $('#q').value = '';
+    $('#atomFilter').value = '';
+    // Reset radios to AND
+    document.querySelectorAll('.atom-mode input[name="mode"]').forEach(r => r.checked = (r.value === 'and'));
+    renderAtomChips();
+    renderResults();
+    updateURL();
+  });
 }
 
-// --- Init after DOM ready ---
-async function init() {
+(async function init() {
   await loadData();
   restoreFromURL();
-  renderTagSelectOnce();
-  bindControlEvents();
-  renderAtomChips();
-  renderResults();
+  renderTagSelectOnce();   // build tag options once
+  bindControlEvents();     // bind once
+  renderAtomChips();       // render chips area
+  renderResults();         // render cards
   updateURL();
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  init().catch((err) => {
-    console.error('[init] Initialization failed:', err);
-  });
-});
-``
+})();
