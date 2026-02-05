@@ -105,18 +105,21 @@ function renderResults() {
     const insBox = node.querySelector('.instructions');
     if (r.components) {
       r.components.forEach(c => {
-        const h = document.createElement('h4'); h.textContent = c.component_name; ingBox.appendChild(h);
-        const ul = document.createElement('ul');
-        (c.ingredients||[]).forEach(i => {
-          const li = document.createElement('li');
-          li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
-          ul.appendChild(li);
-        });
-        ingBox.appendChild(ul);
-        const h2 = document.createElement('h4'); h2.textContent = c.component_name + ' – Steps'; insBox.appendChild(h2);
-        const ol = document.createElement('ol');
-        (c.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
-        insBox.appendChild(ol);
+        if (c.ingredients) {
+          const h = document.createElement('h4'); h.textContent = c.component_name; ingBox.appendChild(h);
+          const ul = document.createElement('ul');
+          (c.ingredients||[]).forEach(i => {
+            const li = document.createElement('li');
+            li.textContent = [i.amount, i.item, i.notes, i.optional? '(optional)':'' ].filter(Boolean).join(' ');
+            ul.appendChild(li);
+          });
+          ingBox.appendChild(ul);
+        }
+        if (c.instructions) {
+          const ol = document.createElement('ol');
+          (c.instructions||[]).forEach(step => { const li=document.createElement('li'); li.textContent=step; ol.appendChild(li); });
+          insBox.appendChild(ol);
+        }
       });
     } else {
       const h = document.createElement('h4'); h.textContent = 'Ingredients'; ingBox.appendChild(h);
