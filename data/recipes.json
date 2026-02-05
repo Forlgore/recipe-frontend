@@ -140,6 +140,46 @@
         "plain",
         "greek"
       ]
+    },
+    {
+  "id": 55,
+  "name": "Banana Kivi pie",
+  "servings": 2,
+  "tags": [
+    "oven",
+    "kivi"
+  ],
+  "components": [
+    {
+      "component_name": "Ingredients",
+      "ingredients": [
+        {
+          "amount": "1",
+          "item": "kvi"
+        },
+        {
+          "amount": "2",
+          "item": "banana",
+          "notes": "pealed"
+        },
+        {
+          "amount": "5",
+          "item": "master fruits",
+          "notes": "for gods",
+          "optional": true
+        }
+      ],
+      "instructions": []
+    },
+    {
+      "component_name": "Instructions",
+      "ingredients": [],
+      "instructions": [
+        "1.\tHeat oil in a skillet and cook chicken until browned.",
+        "2.\tAdd cabbage and peppers; sauté 3–5 minutes.",
+        "3.\tAdd tamari, garlic, ginger, and chili flakes.",
+        "4.\tCook 1 more minute and serve hot."
+      ]
     }
   ]
 }
