@@ -1,37 +1,75 @@
-# .github/workflows/ingest-recipe.yml
+name: Ingest Recipe (repository_dispatch → append to data/recipes.json)
+
 on:
   repository_dispatch:
-    types: [recipe_submitted]   # must match the Worker's EVENT_TYPE
+    types: [recipe_submitted]   # must match your Worker's event_type
+
 permissions:
-  contents: write
+  contents: write               # allow commits
+
 jobs:
   append:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout (with LFS)            # <-- ensure real files, not LFS pointers
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Ensure LFS objects are present  # <-- belts & braces for stubborn cases
+        run: |
+          git lfs checkout || true
+          git lfs pull || true
+
       - name: Install jq
         run: |
           sudo apt-get update -y
           sudo apt-get install -y jq
-      - name: Extract recipe
+
+      - name: Diagnostics (branch & file)
         run: |
+          set -euo pipefail
+          echo "Branch:"
+          git rev-parse --abbrev-ref HEAD
+          echo "First 40 lines of data/recipes.json:"
+          sed -n '1,40p' data/recipes.json || echo "Missing"
+
+      - name: Extract recipe payload
+        run: |
+          set -euo pipefail
           printf "%s" '${{ toJson(github.event.client_payload) }}' > event.json
           jq -r '.recipe' event.json > recipe.input.json
           jq . recipe.input.json > /dev/null
-      - name: Validate & append to data/recipes.json
+
+      - name: Validate & append (robust)
         run: |
           set -euo pipefail
           TARGET="data/recipes.json"
-          if [ ! -f "$TARGET" ]; then echo '{ "recipes": [] }' > "$TARGET"; fi
+
+          # Initialize if missing
+          if [ ! -f "$TARGET" ]; then
+            echo '{ "recipes": [] }' > "$TARGET"
+          fi
+
+          # Normalize (strip BOM / pretty-print)
           jq . "$TARGET" > "$TARGET.tmp" && mv "$TARGET.tmp" "$TARGET"
+
+          # If legacy TOP-LEVEL ARRAY, wrap as {.recipes: ARRAY}
           if jq -e 'type=="array"' "$TARGET" > /dev/null; then
             jq '{ recipes: . }' "$TARGET" > "$TARGET.tmp" && mv "$TARGET.tmp" "$TARGET"
           fi
+
+          # Final shape check
           jq -e 'type=="object" and has("recipes") and .recipes|type=="array"' "$TARGET" > /dev/null \
             || { echo "ERROR: $TARGET must be an object with a .recipes array."; exit 1; }
+
+          # Append the incoming item
           jq --slurp '.[0] as $cur | .[1] as $new | $cur | .recipes = (.recipes + [$new])' \
             "$TARGET" recipe.input.json > merged.json
+
           mv merged.json "$TARGET"
+
       - name: Commit & push
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
