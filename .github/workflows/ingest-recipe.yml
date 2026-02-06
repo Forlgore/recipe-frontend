@@ -1,81 +1,47 @@
-name: Ingest Recipe (repository_dispatch → append to data/recipes.json)
-
+# .github/workflows/ingest-recipe.yml
 on:
-  # This workflow is triggered by an external call to the GitHub API:
-  #   POST /repos/{owner}/{repo}/dispatches
-  # with body: { "event_type": "recipe_submitted", "client_payload": { "recipe": { ... } } }
-  # Docs: repository_dispatch external trigger. [1](https://github.com/actions/setup-node/releases)
   repository_dispatch:
-    types: [recipe_submitted]  # must match the Worker’s event_type. [2](https://github.com/actions/checkout)
-
+    types: [recipe_submitted]   # must match the Worker's EVENT_TYPE
+permissions:
+  contents: write
 jobs:
   append:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository (Forlgore/recipe-frontend)
-        uses: actions/checkout@v4
-
-      - name: Install jq (JSON CLI)
+      - uses: actions/checkout@v4
+      - name: Install jq
         run: |
           sudo apt-get update -y
           sudo apt-get install -y jq
-
-      - name: Extract recipe JSON from dispatch payload
-        id: extract
+      - name: Extract recipe
         run: |
-          set -euo pipefail
-          # Save the entire event payload (optional, for debugging)
           printf "%s" '${{ toJson(github.event.client_payload) }}' > event.json
-
-          # Pull out the recipe object placed by the Worker
           jq -r '.recipe' event.json > recipe.input.json
-
-          # Validate we got a proper JSON object
           jq . recipe.input.json > /dev/null
-
-      - name: Validate and append to data/recipes.json (.recipes[])
+      - name: Validate & append to data/recipes.json
         run: |
           set -euo pipefail
-
-          TARGET_FILE="data/recipes.json"
-
-          if [ ! -f "$TARGET_FILE" ]; then
-            echo "ERROR: $TARGET_FILE not found. Initialize it with: { \"recipes\": [] }"
-            exit 1
+          TARGET="data/recipes.json"
+          if [ ! -f "$TARGET" ]; then echo '{ "recipes": [] }' > "$TARGET"; fi
+          jq . "$TARGET" > "$TARGET.tmp" && mv "$TARGET.tmp" "$TARGET"
+          if jq -e 'type=="array"' "$TARGET" > /dev/null; then
+            jq '{ recipes: . }' "$TARGET" > "$TARGET.tmp" && mv "$TARGET.tmp" "$TARGET"
           fi
-
-          # Ensure target file shape is an object with a .recipes array
-          if ! jq -e 'type=="object" and has("recipes") and .recipes|type=="array"' "$TARGET_FILE" > /dev/null; then
-            echo "ERROR: $TARGET_FILE must be an object with a .recipes array."
-            echo "Observed shape:"
-            jq 'type as $t | {type:$t, keys:(keys? // [])}' "$TARGET_FILE" || true
-            exit 1
-          fi
-
-          # Append the new item strictly to .recipes[]
-          jq --slurp '.[0] as $cur | .[1] as $new
-              | $cur | .recipes = (.recipes + [$new])' \
-              "$TARGET_FILE" recipe.input.json > merged.json
-
-          mv merged.json "$TARGET_FILE"
-
-      - name: Commit & push change to default branch
+          jq -e 'type=="object" and has("recipes") and .recipes|type=="array"' "$TARGET" > /dev/null \
+            || { echo "ERROR: $TARGET must be an object with a .recipes array."; exit 1; }
+          jq --slurp '.[0] as $cur | .[1] as $new | $cur | .recipes = (.recipes + [$new])' \
+            "$TARGET" recipe.input.json > merged.json
+          mv merged.json "$TARGET"
+      - name: Commit & push
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # auto-provided token; safe for same-repo writes. [4](https://app.studyraid.com/en/read/14352/488193/configuring-wranglertoml-for-your-project-needs)
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add data/recipes.json
-
-          NAME_FROM_JSON="$(jq -r 'try .name // empty' recipe.input.json)"
-          COMMIT_MSG="Append recipe"
-          if [ -n "$NAME_FROM_JSON" ]; then
-            COMMIT_MSG="Append: ${NAME_FROM_JSON}"
-          fi
-
-          # Commit will no-op if nothing changed (e.g., identical content)
-          git commit -m "$COMMIT_MSG" || { echo 'No changes to commit'; exit 0; }
+          NAME="$(jq -r 'try .name // empty' recipe.input.json)"
+          MSG="Append recipe"
+          [ -n "$NAME" ] && MSG="Append: $NAME"
+          git commit -m "$MSG" || { echo "No changes to commit"; exit 0; }
           git push
