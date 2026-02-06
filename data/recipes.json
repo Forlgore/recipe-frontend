@@ -1,0 +1,78 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Apple Pie",
+      "servings": 8,
+      "tags": ["pie", "fruit", "dessert"],
+      "components": [
+        {
+          "component_name": "Ingredients",
+          "ingredients": [
+            {
+              "amount": "2 cups",
+              "item": "flour",
+              "key": "flour"
+            },
+            {
+              "amount": "1 cup",
+              "item": "sugar",
+              "key": "sugar"
+            },
+            {
+              "amount": "6",
+              "item": "apples",
+              "key": "apples"
+            }
+          ]
+        },
+        {
+          "component_name": "Instructions",
+          "instructions": [
+            "Preheat oven to 375°F (190°C).",
+            "Mix flour and sugar to make the crust.",
+            "Peel and slice apples, then add to the crust.",
+            "Bake for 45 minutes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Spaghetti Bolognese",
+      "servings": 4,
+      "tags": ["pasta", "meat", "Italian"],
+      "components": [
+        {
+          "component_name": "Ingredients",
+          "ingredients": [
+            {
+              "amount": "400g",
+              "item": "spaghetti",
+              "key": "spaghetti"
+            },
+            {
+              "amount": "500g",
+              "item": "ground beef",
+              "key": "ground_beef"
+            },
+            {
+              "amount": "1",
+              "item": "onion",
+              "key": "onion"
+            }
+          ]
+        },
+        {
+          "component_name": "Instructions",
+          "instructions": [
+            "Cook spaghetti according to package instructions.",
+            "Brown ground beef and onion in a pan.",
+            "Add tomato sauce and simmer for 20 minutes.",
+            "Serve sauce over spaghetti."
+          ]
+        }
+      ]
+    }
+  ]
+}
